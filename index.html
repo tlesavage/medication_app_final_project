@@ -5,10 +5,15 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <section class="container" id=""upNextSec>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="medList.html">Medications</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+    </ul>
+    <section class="container" id="upNextSec">
       <header>Up Next</header>
-      <p>You have no medications</p>
-      <table id="upNextTable">
+      <p id="noMedMessage">You have no medications</p>
+      <table id="upNextTable" hidden>
         <tr>
           <th>Medication</th>
           <th>Time to Take Next</th>

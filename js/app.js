@@ -27,37 +27,41 @@ var sample = new Medication('nitro', 'lee', 1, 'mg', 30, 'Jan 1', '5 days', '6 h
 
 //medications array needs to be put in localStorage.
 
-(Medication.renderUpNextTable = function(){
-  var tableEl = document.getElementById('upNextTable');
+(Medication.renderUpNextTable = function() {
+  //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
+  //Here we should be checking whether there is anything in localStorage array. So this if statement will need to change.
+  //Also at this time the page will be displaying all current medications in no particular order
+  //Need to arrange medications array by time time to take somehow.
+  if (0 < medications.length) {
+    document.getElementById('noMedMessage').hidden = true;
+    var tableEl = document.getElementById('upNextTable');
+    tableEl.hidden = false;
 
-  for (meds in medications) {
-    if (medications[meds].taking = true) {
-      var trEl = document.createElement('tr');
+    for (meds in medications) {
+      if (medications[meds].taking = true) {
+        var trEl = document.createElement('tr');
 
-      var medNameThEl = document.createElement('th');
-      medNameThEl.textContent = medications[meds].name;
-      trEl.appendChild(medNameThEl);
+        var medNameThEl = document.createElement('th');
+        // medNameThEl.id = medications[meds].name;
+        medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name.charAt(0).toUpperCase() + medications[meds].name.slice(1) + '</a>';
+        trEl.appendChild(medNameThEl);
 
-      var timeNextTdEl = document.createElement('td');
-      timeNextTdEl.textContent = medications[meds].first;
-      trEl.appendChild(timeNextTdEl);
+        var timeNextTdEl = document.createElement('td');
+        timeNextTdEl.textContent = medications[meds].first;
+        trEl.appendChild(timeNextTdEl);
 
-      var dosageTdEl = document.createElement('td');
-      dosageTdEl.textContent = medications[meds].dosage;
-      trEl.appendChild(dosageTdEl);
+        var dosageTdEl = document.createElement('td');
+        dosageTdEl.textContent = medications[meds].dosage;
+        trEl.appendChild(dosageTdEl);
 
-      var adherenceTdEl = document.createElement('td');
-      adherenceTdEl.innerHTML = '<form><input type="checkbox" name="adherence" value="took" /> "Took" <input type="checkbox" name="adherence" value="skipped"> "Skip" </form>';
-      console.log(trEl);
-      console.log(adherenceTdEl);
-      // trEl.appendChild('adherenceTdEl');
+        var adherenceTdEl = document.createElement('td');
+        adherenceTdEl.innerHTML = '<form><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
+        trEl.appendChild(adherenceTdEl);
 
-      tableEl.appendChild(trEl);
+        tableEl.appendChild(trEl);
+      }
     }
   }
-  //Code to render table to landing page
-  //remember to assign id to Medication.name
-  //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
 },
 
 Medication.renderCurrTable = function () {
@@ -82,7 +86,9 @@ Medication.renderUpNextTable();
 
 var schedule = {
   // alert: write code to compare current time to schdeule time to alert for late dose
+
   // taken: write code to add 1 to chart data for taken dose
+
   // skipped; write code to add 1 to chart date for skipped dose
 };
 
@@ -92,4 +98,4 @@ var schedule = {
 
 //On med.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
 
-//On addmed.html need event listener for when you click save to check whether no longer taking or add to current schedule was checked so that we know whether to archive or add to current med list or add to UPNext on index.html.
+//On addmed.html need event listener for when you click save to check whether no longer taking or add to current schedule was checked so that
