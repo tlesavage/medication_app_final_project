@@ -23,16 +23,18 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   medications.push(this);
 }
 
+var sample = new Medication('nitro', 'lee', 1, 'mg', 30, 'Jan 1', '5 days', '6 hours', '8 pm', null, null, true, false, 9, 'Walgreens', '2063722460', true, true, 'Nothing to add all good');
+
 //medications array needs to be put in localStorage.
 
 (Medication.renderUpNextTable = function(){
-  var tableEl = document.getElementsById('upNextTable');
+  var tableEl = document.getElementById('upNextTable');
 
   for (meds in medications) {
     if (medications[meds].taking = true) {
       var trEl = document.createElement('tr');
 
-      var medThEl = document.createElement('th');
+      var medNameThEl = document.createElement('th');
       medNameThEl.textContent = medications[meds].name;
       trEl.appendChild(medNameThEl);
 
@@ -45,8 +47,10 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
       trEl.appendChild(dosageTdEl);
 
       var adherenceTdEl = document.createElement('td');
-      adherenceTdEl.innerHTML = '<form><input type="checkbox" name="adherence" value="took" /> Took <input type="checkbox" name="adherence" value="skipped"> Skip</form>';
-      trEl.appendChild('adherenceTdEl');
+      adherenceTdEl.innerHTML = '<form><input type="checkbox" name="adherence" value="took" /> "Took" <input type="checkbox" name="adherence" value="skipped"> "Skip" </form>';
+      console.log(trEl);
+      console.log(adherenceTdEl);
+      // trEl.appendChild('adherenceTdEl');
 
       tableEl.appendChild(trEl);
     }
@@ -73,6 +77,8 @@ Medication.createChart = function() {
   //Need chart to display on landing to show current streak
   //pulling also from localStorage and targeting the 'took it' or 'skipped' propery of each object, then adding 1 to the chart for each object htat has one of those selected (or deleting 1 if 'skipped')
 })();
+
+Medication.renderUpNextTable();
 
 var schedule = {
   // alert: write code to compare current time to schdeule time to alert for late dose
