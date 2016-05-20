@@ -26,6 +26,31 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
 //medications array needs to be put in localStorage.
 
 (Medication.renderUpNextTable = function(){
+  var tableEl = document.getElementsById('upNextTable');
+
+  for (meds in medications) {
+    if (medications[meds].taking = true) {
+      var trEl = document.createElement('tr');
+
+      var medThEl = document.createElement('th');
+      medNameThEl.textContent = medications[meds].name;
+      trEl.appendChild(medNameThEl);
+
+      var timeNextTdEl = document.createElement('td');
+      timeNextTdEl.textContent = medications[meds].first;
+      trEl.appendChild(timeNextTdEl);
+
+      var dosageTdEl = document.createElement('td');
+      dosageTdEl.textContent = medications[meds].dosage;
+      trEl.appendChild(dosageTdEl);
+
+      var adherenceTdEl = document.createElement('td');
+      adherenceTdEl.innerHTML = '<form><input type="checkbox" name="adherence" value="took" /> Took <input type="checkbox" name="adherence" value="skipped"> Skip</form>';
+      trEl.appendChild('adherenceTdEl');
+
+      tableEl.appendChild(trEl);
+    }
+  }
   //Code to render table to landing page
   //remember to assign id to Medication.name
   //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
