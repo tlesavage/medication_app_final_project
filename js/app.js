@@ -96,37 +96,40 @@ formEl.addEventListener('submit', function(event) {
 //   }
 // },
 //
-// Medication.renderCurrTable = function () {
-//   if(localStorage.xxxx){
-//     var medRows = document.createElement('tr');
-//     var drugName = document.createElement('th');
-//     drugName.textContent = medication.name;
-//     drugName.setAttribute('id', medication.name);
-//     medRows.appendChild(drugName);
-//     for(medication in medications) {
-//       if (medications[medication].taking === true) {
-//         var doseData = medications[medication].dosage; //not sure if this is right...trying to pinpoint a specific property of an object within the medications array.
-//         var doseTypeData = medications[medication].doseType;
-//         // var amtLeftData = medications.Medication. //this is going to require some math and calling from the event listener.  i have to take the medication.quantity and subtract one for each time they've said they took the medication, then i can call that and assign it to this variable.
-//         // var numRefillsData = medications[medication]. // this is going to have to have more math too...because i need to take the total number of refills initially provided, then know how many times the user has depleted the total number of pills (so if they were given 30, how many times did 30 = 0, then once that hits 0, subtract one from the total number of refills.)
-//         medRows.appendChild(doseData);
-//         medRows.appendChild(doseTypeData);
-//         medRows.appendChild(amtLeftData);
-//         medRows.appendChild(numRefillsData);
-//       }
-//       var remove = document.createElement('a');
-//       var linkText = document.createTextNode("Remove");
-//       a.appendChild(linkText);
-//       a.title = "Remove";
-//       a.href = ""; // this needs to be more functions removing the element and putting it in the archive table...so i need to see how to remove the row, but then i'll call whatever 'add to archive table' method we have.
-//       medRows.appendChild(a);
-//   };
-//   };
-//   //Write some code to create table on medication.html
-//   //remember to assign id to Medication.name
-//   //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table.
-//
-// },
+Medication.renderCurrTable = function () { //i have to check to see fi something exists in LS.  then i have to pull it out, put it into the medications array to give that the most current data.  then i have to start iterating over it and pulling name, dosage, dose type
+  if(localStorage.drugArray){
+  medications = JSON.parse(localStorage.getItem('drugArray'));
+    for(medication in medications) {
+      if (medications[medication].taking === true) {
+        for(var j = 0; j < medications.length; j++) {
+          // allImages[j].votes = data.datasets[0].data[j];
+          var doseData = medications[medication].dosage;
+          var doseTypeData = medications[medication].doseType;
+          var medRows = document.createElement('tr');
+          var drugName = document.createElement('th');
+    drugName.textContent = medication.name;
+    drugName.setAttribute('id', medication.name);
+    medRows.appendChild(drugName);
+        // var amtLeftData = medications.Medication. //this is going to require some math and calling from the event listener.  i have to take the medication.quantity and subtract one for each time they've said they took the medication, then i can call that and assign it to this variable.
+        // var numRefillsData = medications[medication]. // this is going to have to have more math too...because i need to take the total number of refills initially provided, then know how many times the user has depleted the total number of pills (so if they were given 30, how many times did 30 = 0, then once that hits 0, subtract one from the total number of refills.)
+        medRows.appendChild(doseData);
+        medRows.appendChild(doseTypeData);
+        medRows.appendChild(amtLeftData);
+        medRows.appendChild(numRefillsData);
+      }
+      var remove = document.createElement('a');
+      var linkText = document.createTextNode("Remove");
+      a.appendChild(linkText);
+      a.title = "Remove";
+      a.href = ""; // this needs to be more functions removing the element and putting it in the archive table...so i need to see how to remove the row, but then i'll call whatever 'add to archive table' method we have.
+      medRows.appendChild(a);
+  };
+  };
+  //Write some code to create table on medication.html
+  //remember to assign id to Medication.name
+  //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table.
+
+},
 //
 // Medication.renderArchTable = function() {
 //   //Write some code to create table on archive page
