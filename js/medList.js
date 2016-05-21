@@ -61,3 +61,5 @@ Medication.renderCurrTable = function () {
 };
 
 Medication.renderCurrTable();
+
+//On medList.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
