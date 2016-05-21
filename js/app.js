@@ -24,7 +24,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.notes = notes;
   medications.push(this);
   // Medication.renderCurrTable(this);
-}
+};
 
 var formEl = document.getElementById('medForm');
 // formEl.addEventListener('submit', function(event) {
@@ -125,6 +125,9 @@ var formEl = document.getElementById('medForm');
 //   };
 // };
 //
+// Medication.renderCurrTable();
+// };
+
 // Medication.renderCurrTable();
 
         // var amtLeftData = medications.Medication. //this is going to require some math and calling from the event listener.  i have to take the medication.quantity and subtract one for each time they've said they took the medication, then i can call that and assign it to this variable.
