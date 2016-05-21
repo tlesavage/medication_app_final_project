@@ -1,3 +1,10 @@
+body {
+  max-width: 960px;
+  margin: 0 auto;
+  background-color: #004a69;
+  color: white;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -20,4 +27,25 @@ li a {
 
 li a:hover {
     background-color: #111;
+}
+
+table, td, th {
+  margin: 0 auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td, th {
+  text-align: center;
+  padding: 10px;
+  background-color: #bdd1dd;
+  color: black;
+}
+
+body > section > a {
+  color: red;
+}
+
+#noMedMessage {
+  text-align: center;
 }

@@ -3,13 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title>Your Medication List</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <header>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medList.html">Medications</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+      </ul>
+    </header>
     <main>
       <section class="contianer" id="medList">
         <h1>Your Current Medications</h1>
         <input type="submit" value="Add New Medication" id="save" />
         <section id="medTable">
+          <table id="theTable">
+            <tr>
+              <th>Medication</th>
+              <th>Dosage</th>
+              <th>Dosage Type</th>
+              <th>Amount Remaining</th>
+              <th># of Refills</th>
+            </tr>
+          </table>
         </section>
       </section>
     </main>
