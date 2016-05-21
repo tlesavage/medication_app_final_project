@@ -54,4 +54,35 @@ formEl.addEventListener('submit', function(event) {
   localStorage.setItem('drugArray', jsonMed);
 });
 
+//this is going to happen on the addMed page and will check for both the click item and the medications array in LS.  if both exist, then it will compare them (using similar for loop as we did in the voting) and then target fieldID.value = object.value.  then, once that is done, it will delete the click item from LS.
+Medication.renderEditFields = function () {
+  if(localStorage.drugArray && localStorage.clickStored) {
+    medications = JSON.parse(localStorage.getItem('drugArray'));
+    drugNameClicked = JSON.parse(localStorage.getItem('clickStored'));
+    for(var j = 0; j < medications.length; j++) {
+      medications[j].name = drugNameClicked;
+    }
+    var editEl = document.getElementById(medForm);
+    medName.value =
+    docName.value;
+    dose.value;
+    dosageType.value;
+    numRx.value;
+    startDate.value;
+    duration.value;
+    duration.value;
+    firstTake.value;
+    secondTake.value;
+    thirdTake.value;
+    withFood.checked;
+    beforeFood.checked;
+    numRefills.value;
+    pharmName.value;
+    pharmNumber.value;
+    noLongerTaking.checked;
+    addSched.checked;
+    medNotes.value;
+
+  }
+
 //On addmed.html need event listener for when you click save to check whether no longer taking or add to current schedule was checked

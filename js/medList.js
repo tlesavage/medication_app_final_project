@@ -62,4 +62,12 @@ Medication.renderCurrTable = function () {
 
 Medication.renderCurrTable();
 
+//this is listening for the click on the drug name and then putting a new key/value pair of 'clicked' and medname into local storage.  This will be then looked for on the addmed page and used to parse out the information.
+Medication.sendClick = function() {
+  drugName.addEventListener('click', function(event) {
+    var clickStored = JSON.stringify(medications[medication].name);
+    localStorage.setItem('medClicked', clickStored);
+  });
+};
+
 //On medList.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
