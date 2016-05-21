@@ -28,74 +28,71 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
 }
 
 var formEl = document.getElementById('medForm');
-formEl.addEventListener('submit', function(event) {
-  event.preventDefault();
-  var newName = event.target.medName.value;
-  var newPrescriber = event.target.docName.value;
-  var newDosage = event.target.dose.value;
-  var newDoseType = event.target.dosageType.value;
-  var newQuantity = parseInt(event.target.numRx.value);
-  var newStart = event.target.startDate.value;
-  var newDuration = event.target.duration.value;
-  var newIntervals = event.target.duration.value;
-  var newFirst = event.target.firstTake.value;
-  var newSecond = event.target.secondTake.value;
-  var newThird = event.target.thirdTake.value;
-  var newWithFood = event.target.withFood.checked;
-  var newBeforeFood = event.target.beforeFood.checked;
-  var newNumRefills = event.target.numRefills.value;
-  var newPharmName = event.target.pharmName.value;
-  var newPharmPhone = event.target.pharmNumber.value;
-  var newTaking = event.target.noLongerTaking.checked;
-  var newAddCurrSched = event.target.addSched.checked;
-  var newNotes = event.target.medNotes.value;
-  var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newSecond, newThird, newWithFood, newBeforeFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
-  formEl.reset();
-  var jsonMed = JSON.stringify(medications);
-  console.log(jsonMed);
-  localStorage.setItem('drugArray', jsonMed);
-});
-// };
+// formEl.addEventListener('submit', function(event) {
+//   event.preventDefault();
+//   var newName = event.target.medName.value;
+//   var newPrescriber = event.target.docName.value;
+//   var newDosage = event.target.dose.value;
+//   var newDoseType = event.target.dosageType.value;
+//   var newQuantity = parseInt(event.target.numRx.value);
+//   var newStart = event.target.startDate.value;
+//   var newDuration = event.target.duration.value;
+//   var newIntervals = event.target.duration.value;
+//   var newFirst = event.target.firstTake.value;
+//   var newSecond = event.target.secondTake.value;
+//   var newThird = event.target.thirdTake.value;
+//   var newWithFood = event.target.withFood.checked;
+//   var newBeforeFood = event.target.beforeFood.checked;
+//   var newNumRefills = event.target.numRefills.value;
+//   var newPharmName = event.target.pharmName.value;
+//   var newPharmPhone = event.target.pharmNumber.value;
+//   var newTaking = event.target.noLongerTaking.checked;
+//   var newAddCurrSched = event.target.addSched.checked;
+//   var newNotes = event.target.medNotes.value;
+//   var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newSecond, newThird, newWithFood, newBeforeFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
+//   formEl.reset();
+//   var jsonMed = JSON.stringify(medications);
+//   console.log(jsonMed);
+//   localStorage.setItem('drugArray', jsonMed);
+// });
 
-//medications array needs to be put in localStorage.
+(Medication.renderUpNextTable = function() {
+  //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
+  //Here we should be checking whether there is anything in localStorage array. So this if statement will need to change.
+  //Also at this time the page will be displaying all current medications in no particular order
+  //Need to arrange medications array by time time to take somehow.
+  if (localStorage.drugArray) {
+    medications = JSON.parse(localStorage.getItem('drugArray'));
+    document.getElementById('noMedMessage').hidden = true;
+    var tableEl = document.getElementById('upNextTable');
+    tableEl.hidden = false;
 
-// (Medication.renderUpNextTable = function() {
-//   //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
-//   //Here we should be checking whether there is anything in localStorage array. So this if statement will need to change.
-//   //Also at this time the page will be displaying all current medications in no particular order
-//   //Need to arrange medications array by time time to take somehow.
-//   if (0 < medications.length) {
-//     document.getElementById('noMedMessage').hidden = true;
-//     var tableEl = document.getElementById('upNextTable');
-//     tableEl.hidden = false;
-//
-//     for (meds in medications) {
-//       if (medications[meds].taking = true) {
-//         var trEl = document.createElement('tr');
-//
-//         var medNameThEl = document.createElement('th');
-//         // medNameThEl.id = medications[meds].name;
-//         medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name.charAt(0).toUpperCase() + medications[meds].name.slice(1) + '</a>';
-//         trEl.appendChild(medNameThEl);
-//
-//         var timeNextTdEl = document.createElement('td');
-//         timeNextTdEl.textContent = medications[meds].first;
-//         trEl.appendChild(timeNextTdEl);
-//
-//         var dosageTdEl = document.createElement('td');
-//         dosageTdEl.textContent = medications[meds].dosage;
-//         trEl.appendChild(dosageTdEl);
-//
-//         var adherenceTdEl = document.createElement('td');
-//         adherenceTdEl.innerHTML = '<form><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
-//         trEl.appendChild(adherenceTdEl);
-//
-//         tableEl.appendChild(trEl);
-//       }
-//     }
-//   }
-// },
-//
+    for (meds in medications) {
+      if (medications[meds].taking = true) {
+        var trEl = document.createElement('tr');
+
+        var medNameThEl = document.createElement('th');
+        medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name.charAt(0).toUpperCase() + medications[meds].name.slice(1) + '</a>';
+        trEl.appendChild(medNameThEl);
+
+        var timeNextTdEl = document.createElement('td');
+        timeNextTdEl.textContent = medications[meds].first;
+        trEl.appendChild(timeNextTdEl);
+
+        var dosageTdEl = document.createElement('td');
+        dosageTdEl.textContent = medications[meds].dosage;
+        trEl.appendChild(dosageTdEl);
+
+        var adherenceTdEl = document.createElement('td');
+        adherenceTdEl.innerHTML = '<form><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
+        trEl.appendChild(adherenceTdEl);
+
+        tableEl.appendChild(trEl);
+      }
+    }
+  }
+})();
+
 // Medication.renderCurrTable = function () {
 //   if(localStorage.xxxx){
 //     var medRows = document.createElement('tr');
