@@ -42,7 +42,7 @@ td, th {
   color: black;
 }
 
-body > section > a {
+main > section > a {
   color: red;
 }
 
