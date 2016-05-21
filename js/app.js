@@ -24,56 +24,36 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
-  Medication.renderCurrTable(tbl, this);
+  // Medication.renderCurrTable(this);
 }
 
-// var sample = new Medication('nitro', 'lee', 1, 'mg', 30, 'Jan 1', '5 days', '6 hours', '8 pm', null, null, true, false, 9, 'Walgreens', '2063722460', true, true, 'Nothing to add all good');
-// Medication.renderNew = function(obj) {
-//   console.log('i have created a drug');
-// };
-  //this is to create a new object based on the user's input into the Add New Medication fields on addmed.html
 var formEl = document.getElementById('medForm');
 formEl.addEventListener('submit', function(event) {
   event.preventDefault();
   var newName = event.target.medName.value;
-  console.log(newName);
   var newPrescriber = event.target.docName.value;
-  console.log(newPrescriber);
   var newDosage = event.target.dose.value; //how do i do this with a selector?
-  console.log(newDosage);
+  var newDoseType = event.target.dosageType.value;
   var newQuantity = parseInt(event.target.numRx.value);
-  console.log(newQuantity);
   var newStart = event.target.startDate.value;
-  console.log(newStart);
   var newDuration = event.target.duration.value;
-  console.log(newDuration);
   var newIntervals = event.target.duration.value; // SELECTOR
-  console.log(newIntervals);
   var newFirst = event.target.firstTake.value;
-  console.log(newFirst);
   var newSecond = event.target.secondTake.value;
-  console.log(newSecond);
   var newThird = event.target.thirdTake.value;
-  console.log(newThird);
   var newWithFood = event.target.withFood.checked;
-  console.log(newWithFood);
   var newBeforeFood = event.target.beforeFood.checked;
-  console.log(newBeforeFood);
   var newNumRefills = event.target.numRefills.value;
-  console.log(newNumRefills);
   var newPharmName = event.target.pharmName.value;
-  console.log(newPharmName);
   var newPharmPhone = event.target.pharmNumber.value;
-  console.log(newPharmPhone);
   var newTaking = event.target.noLongerTaking.checked;
-  console.log(newTaking);
   var newAddCurrSched = event.target.addSched.checked;
-  console.log(newAddCurrSched);
   var newNotes = event.target.medNotes.value;
-  console.log(newNotes);
-  var newDrug = new Medication(newName, newPrescriber, newDosage, newQuantity, newStart, newDuration, newIntervals, newFirst, newSecond, newThird, newWithFood, newBeforeFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
-  console.log(newDrug);
-  Medication.renderNew(newDrug);
+  var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newSecond, newThird, newWithFood, newBeforeFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
+  formEl.reset();
+  var jsonMed = JSON.stringify(medications);
+  console.log(jsonMed);
+  localStorage.setItem('drugArray', jsonMed);
 });
 // };
 
