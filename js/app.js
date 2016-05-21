@@ -1,6 +1,5 @@
 var medications = [];
 
-
 function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, second, third, withFood, beforeFood, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
   this.name = name;
   this.prescriber = prescriber;
@@ -57,8 +56,6 @@ var formEl = document.getElementById('medForm');
 // });
 
 (Medication.renderUpNextTable = function() {
-  //Not only render/create the table but also populate it with any medication object within the medications array found in localStorage (if(localStorage.key)).  So we need to getItem and then JSON.parse the array, assign it to something, then iterate over it using a 'for' loop to populate the table. this will only add items that have a 'true' value for 'add to current schedule' property.
-  //Here we should be checking whether there is anything in localStorage array. So this if statement will need to change.
   //Also at this time the page will be displaying all current medications in no particular order
   //Need to arrange medications array by time time to take somehow.
   if (localStorage.drugArray) {
