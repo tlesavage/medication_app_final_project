@@ -32,12 +32,12 @@ formEl.addEventListener('submit', function(event) {
   event.preventDefault();
   var newName = event.target.medName.value;
   var newPrescriber = event.target.docName.value;
-  var newDosage = event.target.dose.value; //how do i do this with a selector?
+  var newDosage = event.target.dose.value;
   var newDoseType = event.target.dosageType.value;
   var newQuantity = parseInt(event.target.numRx.value);
   var newStart = event.target.startDate.value;
   var newDuration = event.target.duration.value;
-  var newIntervals = event.target.duration.value; // SELECTOR
+  var newIntervals = event.target.duration.value;
   var newFirst = event.target.firstTake.value;
   var newSecond = event.target.secondTake.value;
   var newThird = event.target.thirdTake.value;
