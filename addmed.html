@@ -16,14 +16,21 @@
     <main>
       <h1 class="title" id="addNewTitle" hidden="false">Add New Mediation</h1>
       <h1 class="title" id="editMedTitle" hidden>Edit Medication</h1>
-      <section class="contianer" id="medicationForm">
+      <section class="desc-block-left" id="medicationForm">
         <form id="medForm">
-          <fieldset>
-            <legend id="addForm">Add New</legend>
+          <fieldset1>
+            <legend id="addForm">ADD NEW MEDICATION</legend>
+            <p>&nbsp</p>
             <!-- <legend id="editForm" hidden>Edit</legend> -->
             <input type="text" id="medName" placeholder="Medication Name" required />
+              <br>
+              <br>
             <input type="text" id="docName" placeholder="Prescribing MD Name" />
+              <br>
+              <br>
             <input type="number" id="dose" placeholder="Dosage" required/>
+              <br>
+              <br>
             <select class="medSelect" name="dosageType">
               <option value="default">Dosage Type</option>
               <option value="Pills">Pills</option>
@@ -34,9 +41,17 @@
               <option value="Drops">Drops</option>
               <option value="Other">Other</option>
             </select>
+              <br>
+              <br>
             <input type="number" id="numRx" placeholder="Number in Rx" />
+              <br>
+              <br>
             <input type="date" id="startDate" placeholder="Start Date" required/>
+              <br>
+              <br>
             <input type="text" id="duration" placeholder="Duration of Rx" />
+              <br>
+              <br>
             <select class="interval" name="intervalTake" required>
               <option value="default">Intervals</option>
               <option value="daily">Every Day</option>
@@ -46,26 +61,54 @@
               <option value="twoWeeks">Once Every Two Weeks</option>
               <option value="monthly">Once a Month</option>
             </select>
-            <label for="firstTake">Time First Taken</label>
+              <br>
+              <br>
+            <label for="firstTake">First Time Taken</label>
             <input type="time" id="firstTake" placeholder="First Time Taken" required/>
+              <br>
+              <br>
             <label for="secondTake">Second Time Taken</label>
             <input type="time" id="secondTake" placeholder="Second Time Taken" />
+              <br>
+              <br>
             <label for="thirdTake">Third Time Taken</label>
             <input type="time" id="thirdTake" placeholder="Third Time Taken" />
+              <br>
+              <br>
             <label><input type="checkbox" id="withFood" value="takeWith" required> Take With Food</label>
+              <br>
             <label><input type="checkbox" id="beforeFood" value="takeBefore" required> Take Before Food</label>
+              <br>
+            </fieldset1>
+          </section>
+      <section class="desc-block-right">
+        <fieldset2>
             <input type="number" id="numRefills" placeholder="Number of Refills" />
+            <br>
+            <br>
             <input type="text" id="pharmName" placeholder="Pharmacy Name" />
+            <br>
+            <br>
             <input type="tel" id="pharmNumber" placeholder="Pharmacy Phone" />
+            <br>
+            <br>
             <label><input type="checkbox" id="noLongerTaking" value="doneTaking"> No Longer Taking This</label>
+            <br>
+
             <label><input type="checkbox" id="addSched" value="addToSchedule"> Add to My Current Schedule</label>
+            <br>
+            <br>
             <textarea id="medNotes" rows="4" cols="50">Additional Notes </textarea>
+            <br>
             <a href="medList.html"> Cancel </a>
+            <br>
+            <br>
             <input type="submit" value="Save" id="save" />
-          </fieldset>
+        </fieldset2>
         </form>
       </section>
-    </main>
+      </main>
+      <p>&nbsp</p>
     <section id="disclaimer">
       <p>Please take all medications as directed by your prescribing physician.  If you experience any negative side effects, please contact your doctor immediately.  If you miss a dosage, please contact your physician as soon as possible.  For all other emergencies, please call 911 or go to your nearest emergency room.</p>
     </section>
