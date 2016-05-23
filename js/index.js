@@ -1,4 +1,5 @@
 var medications = [];
+var tableEl = document.getElementById('upNextTable');
 
 function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, second, third, withFood, beforeFood, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
   this.name = name;
@@ -32,7 +33,6 @@ if (localStorage.drugArray) {
   //Also at this time the page will be displaying all current medications in no particular order
   //Need to arrange medications array by time time to take somehow.
     document.getElementById('noMedMessage').hidden = true;
-    var tableEl = document.getElementById('upNextTable');
     tableEl.hidden = false;
 
     for (meds in medications) {
@@ -59,9 +59,17 @@ if (localStorage.drugArray) {
       }
     }
   };
+  Medication.renderUpNextTable();
 };
 
-Medication.renderUpNextTable();
+tableEl.addEventListener('click', function(event) {
+  for(obj in medications) {
+    if (event.target.id === medications[obj].name) {
+      var jsonDrugClicked = JSON.stringify(medications[obj]);
+      localStorage.setItem('medClicked', jsonDrugClicked);
+    };
+  }
+});
 
 // Medication.createChart = function() {
 //   //Need chart to display on landing to show current streak
