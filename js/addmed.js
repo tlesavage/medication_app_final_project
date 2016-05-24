@@ -60,35 +60,35 @@ formEl.addEventListener('submit', function(event) {
   localStorage.setItem('drugArray', jsonMed);
 });
 
-//this is going to happen on the addMed page and will check for both the click item and the medications array in LS.  if both exist, then it will compare them (using similar for loop as we did in the voting) and then target fieldID.value = object.value.  then, once that is done, it will delete the click item from LS.
 Medication.renderEditFields = function () {
-  if(localStorage.drugArray && localStorage.clickStored) {
-    medications = JSON.parse(localStorage.getItem('drugArray'));
-    drugNameClicked = JSON.parse(localStorage.getItem('clickStored'));
-    for(var j = 0; j < medications.length; j++) {
-      medications[j].name = drugNameClicked;
-    }
-    var editEl = document.getElementById(medForm);
-    medName.value =
-    docName.value;
-    dose.value;
-    dosageType.value;
-    numRx.value;
-    startDate.value;
-    duration.value;
-    duration.value;
-    firstTake.value;
-    secondTake.value;
-    thirdTake.value;
-    withFood.checked;
-    beforeFood.checked;
-    numRefills.value;
-    pharmName.value;
-    pharmNumber.value;
-    noLongerTaking.checked;
-    addSched.checked;
-    medNotes.value;
+  if(localStorage.drugArray && localStorage.medClicked) {
+    // medications = JSON.parse(localStorage.getItem('drugArray'));
+    drugNameClicked = JSON.parse(localStorage.getItem('medClicked'));
+    // for(var j = 0; j < medications.length; j++) {
+    //   medications[j].name = drugNameClicked;
+    // }
+    // var editEl = document.getElementById(medForm);
+    medName.value = drugNameClicked.name;
+    docName.value = drugNameClicked.prescriber;
+    dose.value = drugNameClicked.dosage;
+    dosageType.value = drugNameClicked.doseType;
+    numRx.value = drugNameClicked.numRefills;
+    startDate.value = drugNameClicked.startDate;
+    duration.value = drugNameClicked.duration;
+    intervalTake.value = drugNameClicked.intervals;
+    firstTake.value = drugNameClicked.first;
+    secondTake.value = drugNameClicked.second;
+    thirdTake.value = drugNameClicked.third;
+    withFood.checked = drugNameClicked.withFood;
+    beforeFood.checked = drugNameClicked.beforeFood;
+    numRefills.value = drugNameClicked.numRefills;
+    pharmName.value = drugNameClicked.pharmName;
+    pharmNumber.value = drugNameClicked.pharmPhone;
+    noLongerTaking.checked = drugNameClicked.taking;
+    addSched.checked = drugNameClicked.addCurrSched;
+    medNotes.value = drugNameClicked.notes;
+    localStorage.removeItem('medClicked');
   }
 };
 
-//On addmed.html need event listener for when you click save to check whether no longer taking or add to current schedule was checked
+Medication.renderEditFields();
