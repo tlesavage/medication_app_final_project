@@ -1,5 +1,11 @@
 var medications = [];
 
+if (localStorage.drugArray) {
+  medications = JSON.parse(localStorage.getItem('drugArray'));
+} else {
+  medications = [];
+}
+
 function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, second, third, withFood, beforeFood, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
   this.name = name;
   this.prescriber = prescriber;
