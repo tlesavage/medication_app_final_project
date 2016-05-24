@@ -1,4 +1,5 @@
 var medications = [];
+var totalListTable = document.getElementById('theTable');
 
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
@@ -37,10 +38,10 @@ Medication.renderCurrTable = function () {
     console.log(medications);
     for(medication in medications) {
       if (medications[medication].taking === false) {
-        var totalListTable = document.getElementById('theTable');
         var medRows = document.createElement('tr');
+        medRows.id = medications[medication].name;
         var drugName = document.createElement('th');
-        drugName.textContent = medications[medication].name;
+        drugName.innerHTML = '<a href="addmed.html" id=' + medications[medication].name + '>' + medications[medication].name.charAt(0).toUpperCase() + medications[medication].name.slice(1) + '</a>';
         medRows.appendChild(drugName);
         var doseData = document.createElement('td');
         doseData.textContent = medications[medication].dosage;
@@ -48,12 +49,9 @@ Medication.renderCurrTable = function () {
         doseTypeData.textContent = medications[medication].doseType;
         var amountLeft = document.createElement('td');
         amountLeft.textContent = medications[medication].pillsLeft;
-        var fillsLeft = document.createElement('td');
-        fillsLeft.textConent = medications[medication].refillsLeft;
         medRows.appendChild(doseData);
         medRows.appendChild(doseTypeData);
         medRows.appendChild(amountLeft);
-        medRows.appendChild(fillsLeft);
         var remove = document.createElement('a');
         var linkText = document.createTextNode('Remove');
         remove.appendChild(linkText);
@@ -68,12 +66,14 @@ Medication.renderCurrTable = function () {
 
 Medication.renderCurrTable();
 
-//this is listening for the click on the drug name and then putting a new key/value pair of 'clicked' and medname into local storage.  This will be then looked for on the addmed page and used to parse out the information.
-Medication.sendClick = function() {
-  drugName.addEventListener('click', function(event) {
-    var clickStored = JSON.stringify(medications[medication].name);
-    localStorage.setItem('medClicked', clickStored);
-  });
-};
+totalListTable.addEventListener('click', function(event) {
+  for(obj in medications) {
+    if (event.target.id === medications[obj].name) {
+      var jsonDrugClicked = JSON.stringify(medications[obj]);
+      localStorage.setItem('medClicked', jsonDrugClicked);
+    };
+  }
+});
 
+// Medication.sendClick();
 //On medList.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
