@@ -82,7 +82,7 @@ Medication.renderEditFields = function () {
     noLongerTaking.checked;
     addSched.checked;
     medNotes.value;
-
   }
+};
 
 //On addmed.html need event listener for when you click save to check whether no longer taking or add to current schedule was checked
