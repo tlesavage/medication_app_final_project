@@ -24,7 +24,6 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
-  // Medication.renderCurrTable(this);
 };
 
 Medication.renderUpNextTable = function() {
@@ -59,9 +58,36 @@ Medication.renderUpNextTable = function() {
   }
 };
 
+var schedule = {
+  alertMed: function() {
+    var date = new Date();
+    var currentTime = [date.getHours(), date.getMinutes()];
+    for (obj in medications) {
+      var medTime = [parseInt(medications[obj].first.substring(0,2)), parseInt(medications[obj].first.substring(3))];
+      if (currentTime[0] > medTime[0]) {
+        var alertRow = document.getElementById(medications[obj].name + 'Alert');
+        alertRow.className = 'alert';
+        alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
+      } else if (currentTime[0] === medTime[0]) {
+        if (currentTime[1] > medTime[1]) {
+          var alertRow = document.getElementById(medications[obj].name + 'Alert');
+          alertRow.className = 'alert';
+          alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
+        }
+      }
+    }
+  }
+// pulling also from localStorage and targeting the 'took it' or 'skipped' propery of each object, then adding 1 to the chart for each object htat has one of those selected (or deleting 1 if 'skipped')
+//
+//   // taken: write code to add 1 to chart data for taken dose
+//
+//   // skipped; write code to add 1 to chart date for skipped dose
+};
+
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
   Medication.renderUpNextTable();
+  schedule.alertMed();
 }
 
 tableEl.addEventListener('click', function(event) {
