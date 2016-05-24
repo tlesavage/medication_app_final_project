@@ -52,12 +52,15 @@ Medication.renderCurrTable = function () {
         medRows.appendChild(doseData);
         medRows.appendChild(doseTypeData);
         medRows.appendChild(amountLeft);
+        var deleteMed = document.createElement('td');
         var remove = document.createElement('a');
         var linkText = document.createTextNode('Remove');
+        remove.id = 'getRidOf';
         remove.appendChild(linkText);
+        deleteMed.appendChild(remove);
         remove.title = 'Remove';
-        remove.href = ''; // this needs to be more functions removing the element and putting it in the archive table...so i need to see how to remove the row, but then i'll call whatever 'add to archive table' method we have.
-        medRows.appendChild(remove);
+        remove.href = '';
+        medRows.appendChild(deleteMed);
         totalListTable.appendChild(medRows);
       };
     };
@@ -65,6 +68,15 @@ Medication.renderCurrTable = function () {
 };
 
 Medication.renderCurrTable();
+
+totalListTable.addEventListener('click', function(event){
+  for(obj in medications) {
+    if(event.target.id === 'getRidOf') {
+      medications[obj].taking = true;
+      console.log('this med is now: ' + medications[obj].taking);
+    };
+  };
+});
 
 totalListTable.addEventListener('click', function(event) {
   for(obj in medications) {
