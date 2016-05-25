@@ -62,12 +62,7 @@ formEl.addEventListener('submit', function(event) {
 
 Medication.renderEditFields = function () {
   if(localStorage.drugArray && localStorage.medClicked) {
-    // medications = JSON.parse(localStorage.getItem('drugArray'));
     drugNameClicked = JSON.parse(localStorage.getItem('medClicked'));
-    // for(var j = 0; j < medications.length; j++) {
-    //   medications[j].name = drugNameClicked;
-    // }
-    // var editEl = document.getElementById(medForm);
     medName.value = drugNameClicked.name;
     docName.value = drugNameClicked.prescriber;
     dose.value = drugNameClicked.dosage;
