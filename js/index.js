@@ -22,7 +22,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;
   this.taking = taking;
-  this.pillsLeft = 0; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
+  this.pillsLeft = quantity; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
@@ -91,6 +91,10 @@ var schedule = {
     var removeTr = element.parentNode.parentNode.parentNode;
     if (removeTr.id === medications[obj].name + 'Alert') {
       tableEl.removeChild(removeTr);
+      console.log(medications[obj].pillsLeft);
+      medications[obj].pillsLeft = medications[obj].pillsLeft - medications[obj].dosage;
+      console.log(medications[obj].pillsLeft);
+      localStorage.setItem('drugArray', JSON.stringify(medications));
     }
   }
  //taken: write code to add 1 to chart data for taken dose
