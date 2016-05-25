@@ -7,6 +7,7 @@ if (localStorage.drugArray) {
   medications = [];
 }
 
+
 function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, second, third, withFood, beforeFood, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
   this.name = name;
   this.prescriber = prescriber;
@@ -32,6 +33,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   // Medication.renderCurrTable(this);
 };
 
+
 Medication.renderCurrTable = function () {
   if(localStorage.drugArray){
     medications = JSON.parse(localStorage.getItem('drugArray'));
@@ -55,28 +57,25 @@ Medication.renderCurrTable = function () {
         var deleteMed = document.createElement('td');
         var remove = document.createElement('a');
         var linkText = document.createTextNode('Remove');
-        remove.id = 'getRidOf';
+        remove.id = medications[medication].name;
         remove.appendChild(linkText);
         deleteMed.appendChild(remove);
         remove.title = 'Remove';
         remove.href = '';
+        // remove.onclick = console.log('i was clicked');;
         medRows.appendChild(deleteMed);
         totalListTable.appendChild(medRows);
       };
     };
   };
 };
-
-Medication.renderCurrTable();
-
-totalListTable.addEventListener('click', function(event){
-  for(obj in medications) {
-    if(event.target.id === 'getRidOf') {
-      medications[obj].taking = true;
-      console.log('this med is now: ' + medications[obj].taking);
-    };
-  };
-});
+// function changeValue () {
+//   for(medication in medications){
+//     var newTakenValue = document.getElementById(Medication.taken);
+//     var newTakenValue = true;
+//     console.log('the new taken is ' + newTakenValue);
+//   }
+// };
 
 totalListTable.addEventListener('click', function(event) {
   for(obj in medications) {
@@ -86,6 +85,18 @@ totalListTable.addEventListener('click', function(event) {
     };
   }
 });
+
+totalListTable.addEventListener('click', function(event){
+  for(obj in medications) {
+    if(event.target.id === medications[obj].name) {
+      medications[obj].taking = true;
+      var takenChanged = JSON.stringify(medications);
+      localStorage.setItem('drugArray', takenChanged);
+    };
+  };
+});
+Medication.renderCurrTable();
+
 
 // Medication.sendClick();
 //On medList.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
