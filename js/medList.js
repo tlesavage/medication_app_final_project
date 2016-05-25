@@ -57,7 +57,7 @@ Medication.renderCurrTable = function () {
         var deleteMed = document.createElement('td');
         var remove = document.createElement('a');
         var linkText = document.createTextNode('Remove');
-        remove.id = medications[medication].name;
+        remove.id = medications[medication].name + 'remove';
         remove.appendChild(linkText);
         deleteMed.appendChild(remove);
         remove.title = 'Remove';
@@ -69,14 +69,8 @@ Medication.renderCurrTable = function () {
     };
   };
 };
-// function changeValue () {
-//   for(medication in medications){
-//     var newTakenValue = document.getElementById(Medication.taken);
-//     var newTakenValue = true;
-//     console.log('the new taken is ' + newTakenValue);
-//   }
-// };
 
+//listening for a click on the med name to view prepopulated fields
 totalListTable.addEventListener('click', function(event) {
   for(obj in medications) {
     if (event.target.id === medications[obj].name) {
@@ -86,9 +80,10 @@ totalListTable.addEventListener('click', function(event) {
   }
 });
 
+//listening for a click on the remove to remove item from the list.
 totalListTable.addEventListener('click', function(event){
   for(obj in medications) {
-    if(event.target.id === medications[obj].name) {
+    if(event.target.id === medications[obj].name + 'remove') {
       medications[obj].taking = true;
       var takenChanged = JSON.stringify(medications);
       localStorage.setItem('drugArray', takenChanged);
