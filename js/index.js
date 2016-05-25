@@ -1,4 +1,6 @@
 var medications = [];
+var quantityTaken = 0;
+var quantitySkipped = 0;
 
 var tableEl = document.getElementById('upNextTable');
 
@@ -50,7 +52,7 @@ Medication.renderUpNextTable = function() {
       trEl.appendChild(dosageTdEl);
 
       var adherenceTdEl = document.createElement('td');
-      adherenceTdEl.innerHTML = '<form><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
+      adherenceTdEl.innerHTML = '<form id="' + medications[meds].name + 'Adhere' + '"><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
       trEl.appendChild(adherenceTdEl);
 
       tableEl.appendChild(trEl);
@@ -63,25 +65,36 @@ var schedule = {
     var date = new Date();
     var currentTime = [date.getHours(), date.getMinutes()];
     for (obj in medications) {
-      var medTime = [parseInt(medications[obj].first.substring(0,2)), parseInt(medications[obj].first.substring(3))];
-      if (currentTime[0] > medTime[0]) {
-        var alertRow = document.getElementById(medications[obj].name + 'Alert');
-        alertRow.className = 'alert';
-        alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
-      } else if (currentTime[0] === medTime[0]) {
-        if (currentTime[1] > medTime[1]) {
+      if (medications[obj].taking === false) {
+        var medTime = [parseInt(medications[obj].first.substring(0,2)), parseInt(medications[obj].first.substring(3))];
+        if (currentTime[0] > medTime[0]) {
           var alertRow = document.getElementById(medications[obj].name + 'Alert');
           alertRow.className = 'alert';
           alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
+        } else if (currentTime[0] === medTime[0]) {
+          if (currentTime[1] > medTime[1]) {
+            var alertRow = document.getElementById(medications[obj].name + 'Alert');
+            alertRow.className = 'alert';
+            alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
+          }
         }
       }
     }
+  },
+
+  clickMedName: function() {
+    var jsonDrugClicked = JSON.stringify(medications[obj]);
+    localStorage.setItem('medClicked', jsonDrugClicked);
+  },
+
+  tookEvent: function(element) {
+    var removeTr = element.parentNode.parentNode.parentNode;
+    if (removeTr.id === medications[obj].name + 'Alert') {
+      tableEl.removeChild(removeTr);
+    }
   }
-// pulling also from localStorage and targeting the 'took it' or 'skipped' propery of each object, then adding 1 to the chart for each object htat has one of those selected (or deleting 1 if 'skipped')
-//
-//   // taken: write code to add 1 to chart data for taken dose
-//
-//   // skipped; write code to add 1 to chart date for skipped dose
+ //taken: write code to add 1 to chart data for taken dose
+//skipped; write code to add 1 to chart date for skipped dose
 };
 
 if (localStorage.drugArray) {
@@ -93,8 +106,9 @@ if (localStorage.drugArray) {
 tableEl.addEventListener('click', function(event) {
   for(obj in medications) {
     if (event.target.id === medications[obj].name) {
-      var jsonDrugClicked = JSON.stringify(medications[obj]);
-      localStorage.setItem('medClicked', jsonDrugClicked);
-    };
+      schedule.clickMedName();
+    } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+      schedule.tookEvent(event.target);
+    }
   }
 });
