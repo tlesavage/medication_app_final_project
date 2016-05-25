@@ -86,3 +86,8 @@ img {
 #right{float:right;width:250px;}
 
 #center{margin:0 auto;width:250px;}
+
+p1 {
+ display:inline;
+ word-wrap: break-word;
+ color: black;
