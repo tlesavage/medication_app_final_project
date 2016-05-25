@@ -13,6 +13,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="medList.html">Medications</a></li>
+        <li><a href="archives.html">Archives</a></li>
         <li><a href="aboutus.html">About Us</a></li>
       </ul>
     </header>
@@ -34,7 +35,8 @@
         <p id="medRecent1">You have not added any medications</p>
         <p id="medRecent2"></p>
         <a href="addmed.html" id="editMeds">Edit Current Medications</a>
-        <button type="button" name="addNewMed" id="addNewButton">Add New</button>
+        <form action="addMed.html">
+          <input type="submit" value="Add New Medication"></form>
       </section>
       <section class="container right" id="streak">
         <canvas id="myChart" width="300" height="300"></canvas>

@@ -6,7 +6,7 @@ if (localStorage.drugArray) {
   medications = [];
 }
 
-function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, second, third, withFood, beforeFood, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
+function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, food, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
   this.name = name;
   this.prescriber = prescriber;
   this.dosage = dosage;
@@ -16,10 +16,10 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.duration = duration;
   this.intervals = intervals;
   this.first = first;
-  this.second = second;
-  this.third = third;
-  this.withFood = withFood;
-  this.beforeFood = beforeFood;
+  // this.second = second;
+  // this.third = third;
+  this.food = food;
+  // this.beforeFood = beforeFood;
   this.numRefills = numRefills;
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;

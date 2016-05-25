@@ -10,6 +10,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="medList.html">Medications</a></li>
+        <li><a href="archives.html">Archives</a></li>
         <li><a href="aboutus.html">About Us</a></li>
       </ul>
     </header>
@@ -65,19 +66,24 @@
               <br>
             <label for="firstTake">First Time Taken</label>
             <input type="time" id="firstTake" placeholder="First Time Taken" required/>
-              <br>
+              <!-- <br>
               <br>
             <label for="secondTake">Second Time Taken</label>
             <input type="time" id="secondTake" placeholder="Second Time Taken" />
               <br>
               <br>
             <label for="thirdTake">Third Time Taken</label>
-            <input type="time" id="thirdTake" placeholder="Third Time Taken" />
+            <input type="time" id="thirdTake" placeholder="Third Time Taken" /> -->
               <br>
               <br>
-            <label><input type="checkbox" id="withFood" value="takeWith" required> Take With Food</label>
+            <select class="foodSelect" id="foodInstructions" name="food">
+              <option value="default">Food Instructions</option>
+              <option value="with">With Food</option>
+              <option value="before">Before Food</option>
+            </select>
+            <!-- <label><input type="checkbox" id="withFood" value="takeWith" required> Take With Food</label>
               <br>
-            <label><input type="checkbox" id="beforeFood" value="takeBefore" required> Take Before Food</label>
+            <label><input type="checkbox" id="beforeFood" value="takeBefore" required> Take Before Food</label> -->
               <br>
             </fieldset1>
           </section>
