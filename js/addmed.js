@@ -24,7 +24,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;
   this.taking = taking;
-  this.pillsLeft = 0; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
+  this.pillsLeft = quantity; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
@@ -82,7 +82,7 @@ Medication.renderEditFields = function () {
     noLongerTaking.checked = drugNameClicked.taking;
     addSched.checked = drugNameClicked.addCurrSched;
     medNotes.value = drugNameClicked.notes;
-    // localStorage.removeItem('medClicked');
+    localStorage.removeItem('medClicked');
   }
 };
 
