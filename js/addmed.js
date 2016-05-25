@@ -82,7 +82,7 @@ Medication.renderEditFields = function () {
     noLongerTaking.checked = drugNameClicked.taking;
     addSched.checked = drugNameClicked.addCurrSched;
     medNotes.value = drugNameClicked.notes;
-    localStorage.removeItem('medClicked');
+    // localStorage.removeItem('medClicked');
   }
 };
 
