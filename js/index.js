@@ -1,4 +1,9 @@
+var date = new Date();
+// var currentDate = [date.getMonth(), date.getDate()];
 var medications = [];
+
+var todaysMeds = [];
+// var todayDate;
 var quantityTaken = [40];
 var quantitySkipped = 0;
 
@@ -34,29 +39,27 @@ Medication.renderUpNextTable = function() {
   document.getElementById('noMedMessage').hidden = true;
   tableEl.hidden = false;
 
-  for (meds in medications) {
-    if (medications[meds].taking === false) {
-      var trEl = document.createElement('tr');
-      trEl.id = medications[meds].name + 'Alert';
+  for (meds in todaysMeds) {
+    var trEl = document.createElement('tr');
+    trEl.id = todaysMeds[meds].name + 'Alert';
 
-      var medNameThEl = document.createElement('th');
-      medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name + '</a>';
-      trEl.appendChild(medNameThEl);
+    var medNameThEl = document.createElement('th');
+    medNameThEl.innerHTML = '<a href="addmed.html" id=' + todaysMeds[meds].name + '>' + todaysMeds[meds].name + '</a>';
+    trEl.appendChild(medNameThEl);
 
-      var timeNextTdEl = document.createElement('td');
-      timeNextTdEl.textContent = medications[meds].first;
-      trEl.appendChild(timeNextTdEl);
+    var timeNextTdEl = document.createElement('td');
+    timeNextTdEl.textContent = todaysMeds[meds].first;
+    trEl.appendChild(timeNextTdEl);
 
-      var dosageTdEl = document.createElement('td');
-      dosageTdEl.textContent = medications[meds].dosage;
-      trEl.appendChild(dosageTdEl);
+    var dosageTdEl = document.createElement('td');
+    dosageTdEl.textContent = todaysMeds[meds].dosage;
+    trEl.appendChild(dosageTdEl);
 
-      var adherenceTdEl = document.createElement('td');
-      adherenceTdEl.innerHTML = '<form id="' + medications[meds].name + 'Adhere' + '"><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
-      trEl.appendChild(adherenceTdEl);
+    var adherenceTdEl = document.createElement('td');
+    adherenceTdEl.innerHTML = '<form id="' + todaysMeds[meds].name + 'Adhere' + '"><input type="radio" name="adherence" value="took" /> Took <input type="radio" name="adherence" value="skipped"> Skip </form>';
+    trEl.appendChild(adherenceTdEl);
 
-      tableEl.appendChild(trEl);
-    }
+    tableEl.appendChild(trEl);
   }
 };
 
@@ -73,23 +76,21 @@ var schedule = {
   },
 
   alertMed: function() {
-    var date = new Date();
     var currentTime = [date.getHours(), date.getMinutes()];
-    for (obj in medications) {
-      if (medications[obj].taking === false) {
-        var medTime = [parseInt(medications[obj].first.substring(0,2)), parseInt(medications[obj].first.substring(3))];
-        if (currentTime[0] > medTime[0]) {
-          var alertRow = document.getElementById(medications[obj].name + 'Alert');
+    for (obj in todaysMeds) {
+      var medTime = [parseInt(todaysMeds[obj].first.substring(0,2)), parseInt(todaysMeds[obj].first.substring(3))];
+      if (currentTime[0] > medTime[0]) {
+        var alertRow = document.getElementById(todaysMeds[obj].name + 'Alert');
+        alertRow.className = 'alert';
+        alert('You have missed your scheduled dose of ' + todaysMeds[obj].name + '!');
+      } else if (currentTime[0] === medTime[0]) {
+        if (currentTime[1] > medTime[1]) {
+          var alertRow = document.getElementById(todaysMeds[obj].name + 'Alert');
           alertRow.className = 'alert';
-          alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
-        } else if (currentTime[0] === medTime[0]) {
-          if (currentTime[1] > medTime[1]) {
-            var alertRow = document.getElementById(medications[obj].name + 'Alert');
-            alertRow.className = 'alert';
-            alert('You have missed your scheduled dose of ' + medications[obj].name + '!');
-          }
+          alert('You have missed your scheduled dose of ' + todaysMeds[obj].name + '!');
         }
       }
+    // }
     }
   },
 
@@ -109,7 +110,7 @@ var schedule = {
     }
   },
 
-  skipEvent: function (element) {
+  skipEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
     if (removeTr.id === medications[obj].name + 'Alert') {
       tableEl.removeChild(removeTr);
@@ -128,34 +129,64 @@ var schedule = {
 
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
-  Medication.renderUpNextTable();
-  schedule.alertMed();
 }
 
-tableEl.addEventListener('click', function(event) {
-  for(obj in medications) {
-    if (event.target.id === medications[obj].name) {
-      schedule.clickMedName();
-    } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
-      schedule.tookEvent(event.target);
-    } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
-      schedule.skipEvent(event.target);
+if (localStorage.storedDate) {
+  var lastLoginDate = JSON.parse(localStorage.getItem('storedDate'));
+  var currentDate = [date.getMonth(), date.getDate()];
+  if (!(currentDate[0] === lastLoginDate[0]) || !(currentDate[1] === lastLoginDate[1])) {
+    for (meds in medications) {
+      if (medications[meds].taking === false) {
+        todaysMeds.push(medications[meds]);
+        var jsonTodayMeds = JSON.stringify(todaysMeds);
+        localStorage.setItem('todaysMedsStored', jsonTodayMeds);
+      }
+    }
+  } else {
+    var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+  }
+  Medication.renderUpNextTable();
+  schedule.alertMed();
+} else {
+  for (meds in medications) {
+    if (medications[meds].taking === false) {
+      todaysMeds.push(medications[meds]);
+      console.log('Hello');
     }
   }
-});
+  var jsonTodayMeds = JSON.stringify(todaysMeds);
+  localStorage.setItem('todaysMedsStored', jsonTodayMeds);
 
-schedule.displayChart();
+  var currentDate = [date.getMonth(), date.getDate()];
+  console.log(currentDate);
+  localStorage.setItem('storedDate', JSON.stringify(currentDate));
+}
 
-function renderRefills(){
-  var refMsg = document.getElementById('refills');
-  for(obj in medications) {
-    if(medications[obj].pillsLeft < 10) {
-      var userMessageRefills = document.createElement('p');
-      console.log('created the p');
-      userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
-      refMsg.appendChild(userMessageRefills);
-    }
-  }
-};
-//'<p class=refMessage>' + 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + 'days.' + '</p>';
-renderRefills();
+//
+// tableEl.addEventListener('click', function(event) {
+//   for(obj in medications) {
+//     if (event.target.id === medications[obj].name) {
+//       schedule.clickMedName();
+//     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+//       schedule.tookEvent(event.target);
+//     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+//       schedule.skipEvent(event.target);
+//     }
+//   }
+// });
+//
+// schedule.displayChart();
+//
+// function renderRefills(){
+//   var refMsg = document.getElementById('refills');
+//   for(obj in medications) {
+//     if(medications[obj].pillsLeft < 10) {
+//       var userMessageRefills = document.createElement('p');
+//       console.log('created the p');
+//       userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
+//       refMsg.appendChild(userMessageRefills);
+//     }
+//   }
+// };
+// //'<p class=refMessage>' + 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + 'days.' + '</p>';
+// renderRefills();
