@@ -4,21 +4,26 @@
     <meta charset="utf-8">
     <title>Archived Medication List</title>
     <link rel="stylesheet" href="css/style.css">
+    <div id="logo">
+      <img src="imgs/main_logo1.png">
+    </div>
   </head>
   <body>
     <header>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="medList.html">Medications</a></li>
-        <li><a href="archives.html">Archives</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-      </ul>
+      <div id="topNav">
+        <nav id="globalNav">
+          <a class="navLink" href="index.html">Home</a>
+          <a class="navLink" href="medList.html">Medications</a>
+          <a class="navLink" href="archives.html">Archives</a>
+          <a class="navLink" href="aboutus.html">About Us</a>
+        </nav>
+      </div>
     </header>
     <main>
       <section class="contianer" id="archiveMedList">
         <h1>Your Archived Medications</h1>
         <section id="archiveTable">
-          <table id="theArchTable">
+          <table class="medicationTableView" id="theArchTable">
             <tr>
               <th>Medication</th>
               <th>Dosage</th>
@@ -29,6 +34,13 @@
         </section>
       </section>
     </main>
+    <div id="footer" align="center">
+      <p class="copyright">&copy; 2016 MedTracker</p>
+        <a class="footLink" href="index.html">Home</a>
+        <a class="footLink" href="medList.html">Medications</a>
+        <a class="footLink" href="archives.html">Archives</a>
+        <a class="footLink" href="aboutus.html">About Us</a>
+    </div>
     <script type="text/javascript" src="js/archive.js"></script>
   </body>
 </html>
