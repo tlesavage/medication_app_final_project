@@ -1,5 +1,5 @@
 var medications = [];
-var quantityTaken = 0;
+var quantityTaken = [40];
 var quantitySkipped = 0;
 
 var tableEl = document.getElementById('upNextTable');
@@ -61,6 +61,17 @@ Medication.renderUpNextTable = function() {
 };
 
 var schedule = {
+  data: {
+    labels: ['Taken'],
+    datasets: [
+      {
+        label: 'Your History',
+        backgroundColor: '#d5f4f0',
+        data: quantityTaken
+      }
+    ]
+  },
+
   alertMed: function() {
     var date = new Date();
     var currentTime = [date.getHours(), date.getMinutes()];
@@ -96,6 +107,14 @@ var schedule = {
       console.log(medications[obj].pillsLeft);
       localStorage.setItem('drugArray', JSON.stringify(medications));
     }
+  },
+
+  displayChart: function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: this.data,
+    });
   }
  //taken: write code to add 1 to chart data for taken dose
 //skipped; write code to add 1 to chart date for skipped dose
@@ -116,3 +135,5 @@ tableEl.addEventListener('click', function(event) {
     }
   }
 });
+
+schedule.displayChart();
