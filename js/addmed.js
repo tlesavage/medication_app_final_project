@@ -53,7 +53,7 @@ formEl.addEventListener('submit', function(event) {
   var newTaking = event.target.noLongerTaking.checked;
   var newAddCurrSched = event.target.addSched.checked;
   var newNotes = event.target.medNotes.value;
-  var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newSecond, newThird, newFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
+  var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
   formEl.reset();
   var jsonMed = JSON.stringify(medications);
   console.log(jsonMed);
