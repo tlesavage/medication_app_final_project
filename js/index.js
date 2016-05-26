@@ -1,9 +1,6 @@
 var date = new Date();
-// var currentDate = [date.getMonth(), date.getDate()];
 var medications = [];
-
 var todaysMeds = [];
-// var todayDate;
 var quantityTaken = [40];
 var quantitySkipped = 0;
 
@@ -27,7 +24,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;
   this.taking = taking;
-  this.pillsLeft = quantity; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
+  this.pillsLeft = quantity;
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
@@ -90,7 +87,6 @@ var schedule = {
           alert('You have missed your scheduled dose of ' + todaysMeds[obj].name + '!');
         }
       }
-    // }
     }
   },
 
@@ -105,16 +101,27 @@ var schedule = {
       tableEl.removeChild(removeTr);
       console.log(todaysMeds[obj].pillsLeft);
       todaysMeds[obj].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
+      for(item in medications) {
+        if (todaysMeds[obj] === medications[item]) {
+          medications[item].pillsLeft = todaysMeds[obj].pillsLeft;
+        }
+      }
       console.log(todaysMeds[obj].pillsLeft);
-      localStorage.setItem('drugArray', JSON.stringify(todaysMeds));
+      todaysMeds.pop(todaysMeds[obj]);
+      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+      localStorage.setItem('drugArray', JSON.stringify(medications));
     }
   },
 
   skipEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
-    if (removeTr.id === medications[obj].name + 'Alert') {
+    if (removeTr.id === todaysMeds[obj].name + 'Alert') {
       tableEl.removeChild(removeTr);
-      console.log(medications[obj].pillsLeft);
+      console.log(todaysMeds[obj].pillsLeft);
+      console.log(todaysMeds);
+      todaysMeds.pop(todaysMeds[obj]);
+      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+      console.log(todaysMeds);
     }
   },
 
@@ -129,37 +136,37 @@ var schedule = {
 
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
-}
 
-if (localStorage.storedDate) {
-  var lastLoginDate = JSON.parse(localStorage.getItem('storedDate'));
-  var currentDate = [date.getMonth(), date.getDate()];
-  if (!(currentDate[0] === lastLoginDate[0]) || !(currentDate[1] === lastLoginDate[1])) {
+  if (localStorage.storedDate) {
+    var lastLoginDate = JSON.parse(localStorage.getItem('storedDate'));
+    var currentDate = [date.getMonth(), date.getDate()];
+    if (!(currentDate[0] === lastLoginDate[0]) || !(currentDate[1] === lastLoginDate[1])) {
+      for (meds in medications) {
+        if (medications[meds].taking === false) {
+          todaysMeds.push(medications[meds]);
+          var jsonTodayMeds = JSON.stringify(todaysMeds);
+          localStorage.setItem('todaysMedsStored', jsonTodayMeds);
+        }
+      }
+    } else {
+      var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+    }
+  } else {
     for (meds in medications) {
       if (medications[meds].taking === false) {
         todaysMeds.push(medications[meds]);
-        var jsonTodayMeds = JSON.stringify(todaysMeds);
-        localStorage.setItem('todaysMedsStored', jsonTodayMeds);
       }
     }
-  } else {
-    var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+
+    var jsonTodayMeds = JSON.stringify(todaysMeds);
+    localStorage.setItem('todaysMedsStored', jsonTodayMeds);
+
+    var currentDate = [date.getMonth(), date.getDate()];
+    console.log(currentDate);
+    localStorage.setItem('storedDate', JSON.stringify(currentDate));
   }
   Medication.renderUpNextTable();
   schedule.alertMed();
-} else {
-  for (meds in medications) {
-    if (medications[meds].taking === false) {
-      todaysMeds.push(medications[meds]);
-      console.log('Hello');
-    }
-  }
-  var jsonTodayMeds = JSON.stringify(todaysMeds);
-  localStorage.setItem('todaysMedsStored', jsonTodayMeds);
-
-  var currentDate = [date.getMonth(), date.getDate()];
-  console.log(currentDate);
-  localStorage.setItem('storedDate', JSON.stringify(currentDate));
 }
 
 tableEl.addEventListener('click', function(event) {
@@ -173,19 +180,19 @@ tableEl.addEventListener('click', function(event) {
     }
   }
 });
-//
+
 // schedule.displayChart();
-//
-// function renderRefills(){
-//   var refMsg = document.getElementById('refills');
-//   for(obj in medications) {
-//     if(medications[obj].pillsLeft < 10) {
-//       var userMessageRefills = document.createElement('p');
-//       console.log('created the p');
-//       userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
-//       refMsg.appendChild(userMessageRefills);
-//     }
-//   }
-// };
-// //'<p class=refMessage>' + 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + 'days.' + '</p>';
-// renderRefills();
+
+function renderRefills(){
+  var refMsg = document.getElementById('refills');
+  for(obj in medications) {
+    if(medications[obj].pillsLeft < 10) {
+      var userMessageRefills = document.createElement('p');
+      console.log('created the p');
+      userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
+      refMsg.appendChild(userMessageRefills);
+    }
+  }
+};
+
+renderRefills();
