@@ -32,7 +32,6 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   // Medication.renderCurrTable(this);
 };
 
-
 Medication.renderCurrTable = function () {
   if(localStorage.drugArray){
     medications = JSON.parse(localStorage.getItem('drugArray'));
@@ -90,7 +89,6 @@ totalListTable.addEventListener('click', function(event){
   };
 });
 Medication.renderCurrTable();
-
 
 // Medication.sendClick();
 //On medList.html need event listener for when you click on medication name -- should take you to addmed.html page with all fields prepopulated.
