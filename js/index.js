@@ -95,7 +95,7 @@ var schedule = {
   },
 
   clickMedName: function() {
-    var jsonDrugClicked = JSON.stringify(medications[obj]);
+    var jsonDrugClicked = JSON.stringify(todaysMeds[obj]);
     localStorage.setItem('medClicked', jsonDrugClicked);
   },
 
@@ -162,18 +162,17 @@ if (localStorage.storedDate) {
   localStorage.setItem('storedDate', JSON.stringify(currentDate));
 }
 
-//
-// tableEl.addEventListener('click', function(event) {
-//   for(obj in medications) {
-//     if (event.target.id === medications[obj].name) {
-//       schedule.clickMedName();
-//     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
-//       schedule.tookEvent(event.target);
-//     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
-//       schedule.skipEvent(event.target);
-//     }
-//   }
-// });
+tableEl.addEventListener('click', function(event) {
+  for(obj in todaysMeds) {
+    if (event.target.id === todaysMeds[obj].name) {
+      schedule.clickMedName();
+    } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+      schedule.tookEvent(event.target);
+    } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+      schedule.skipEvent(event.target);
+    }
+  }
+});
 //
 // schedule.displayChart();
 //
