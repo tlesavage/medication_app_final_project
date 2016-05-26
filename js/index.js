@@ -97,8 +97,6 @@ var schedule = {
       localStorage.setItem('drugArray', JSON.stringify(medications));
     }
   }
- //taken: write code to add 1 to chart data for taken dose
-//skipped; write code to add 1 to chart date for skipped dose
 };
 
 if (localStorage.drugArray) {
@@ -116,3 +114,17 @@ tableEl.addEventListener('click', function(event) {
     }
   }
 });
+
+function renderRefills(){
+  var refMsg = document.getElementById('refills');
+  for(obj in medications) {
+    if(medications[obj].quantity < 10) {
+      var userMessageRefills = document.createElement('p');
+      console.log('created the p');
+      userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
+      refMsg.appendChild(userMessageRefills);
+    }
+  }
+};
+//'<p class=refMessage>' + 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + 'days.' + '</p>';
+renderRefills();
