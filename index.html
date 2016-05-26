@@ -3,7 +3,7 @@
   <head>
     <title>MedTracker</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.min.js'></script>
     <div id="logo">
       <img src="imgs/main_logo1.png">
@@ -11,18 +11,20 @@
   </head>
   <body>
     <header>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="medList.html">Medications</a></li>
-        <li><a href="archives.html">Archives</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-      </ul>
+      <div id="topNav">
+        <nav id="globalNav">
+          <a class="navLink" href="index.html">Home</a>
+          <a class="navLink" href="medList.html">Medications</a>
+          <a class="navLink" href="archives.html">Archives</a>
+          <a class="navLink" href="aboutus.html">About Us</a>
+        </nav>
+      </div>
     </header>
     <main>
       <section class="container" id="upNextSec">
-        <header>Up Next</header>
+        <h1>Up Next</h1>
         <p id="noMedMessage">You have no medications</p>
-        <table id="upNextTable" hidden>
+        <table class="medicationTableView" id="upNextTable" hidden>
           <tr>
             <th>Medication</th>
             <th>Time to Take Next</th>
@@ -32,25 +34,28 @@
         </table>
       </section>
       <section class="container left" id="recentAdd">
-        <header>Your Upcoming Refills</header>
+        <h1>Your Upcoming Refills</h1>
         <section id="refills">
           <!-- <p id="medLowMessage"></p> -->
         </section>
-        <a href="addmed.html" id="editMeds">Edit Current Medications</a>
-        <form action="addMed.html">
-          <input type="submit" value="Add New Medication"></form>
+        <section id="thingsToDoGroup">
+          <a id="editLinkThing" href="addmed.html" id="editMeds">Edit Current Medications</a>
+          <form action="addMed.html">
+          <input class="buttonThing" type="submit" value="Add New Medication"></form>
+        </section>
       </section>
       <section class="container right" id="streak">
         <canvas id="myChart" width="300" height="300"></canvas>
       </section>
     </main>
     <script type="text/javascript" src="js/index.js"></script>
-  </body>
     <div id="footer" align="center">
-        <p1>&copy; 2016 MedTracker</p>
-            <p1><a href="index.html">Home</a></p1>
-            <p1><a href="medList.html">Medications</a></p1>
-            <p1><a href="aboutus.html">About Us</a></p1>
+      <p class="copyright">&copy; 2016 MedTracker</p>
+        <a class="footLink" href="index.html">Home</a>
+        <a class="footLink" href="medList.html">Medications</a>
+        <a class="footLink" href="archives.html">Archives</a>
+        <a class="footLink" href="aboutus.html">About Us</a>
     </div>
+  </body>
 
 </html>

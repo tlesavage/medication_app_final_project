@@ -1,3 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+
+#logo {
+  height:127px;
+  width:960px;
+  background-color: white;
+}
+#logo img {
+  max-width:100%;
+  max-height:100%;
+}
+
+/* Global Nav */
+#topNav {
+  text-align: center;
+  margin-top: 15px;
+  height: 20px;
+  border-bottom: 1px solid grey;
+}
+
+#globalNav {
+  text-align: justify;
+}
+
+#globalNav a {
+  display: inline-block;
+  color: white;
+}
+
+#globalNav a:hover {
+  color: #44970D;
+}
+
+#globalNav:after {
+  content: '';
+  width: 100%;
+  display: inline-block;
+}
+
+.navLink:nth-child(1) {
+  padding-left: 40px;
+}
+
+.navLink:nth-child(4) {
+  padding-right: 40px;
+}
+
+/* End Global Nav */
+
 body {
   max-width: 960px;
   margin: 0 auto;
@@ -5,6 +55,28 @@ body {
   color: white;
 }
 
+/*Controls and Fonts*/
+
+h1, h2, h3, p, a {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font size: 15px;
+}
+
+h3 {
+  font-size: 10px;
+}
+
+#upNextSec {
+  margin-top: 50px;
+}
+/*
 ul {
     list-style-type: none;
     margin: 0;
@@ -27,49 +99,158 @@ li a {
 
 li a:hover {
     background-color: #111;
+}*/
+/* All Tables */
+
+.medicationTableView {
+  width: 100%;
+  border-spacing: 0px;
+  margin-top: 20px;
+  margin-bottom: 70px;
 }
 
-table, td, th {
-  margin: 0 auto;
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-td, th {
-  text-align: center;
-  padding: 10px;
-  background-color: #bdd1dd;
+.medicationTableView th, td {
+  text-align: left;
+  padding: 5px 20px 5px 10px;
+  border-spacing: 0px;
+  border-top: 1px solid #949494;
   color: black;
 }
+
+.medicationTableView a {
+  color: orange;
+}
+
+.medicationTableView a:hover {
+  color: #44970D;
+}
+
+/* End Tables */
+
+/*button styles from css tricks.com*/
+.buttonThing {
+  display: inline;
+   border-top: 1px solid #97a7f7;
+   background: #a5d665;
+   background: -webkit-gradient(linear, left top, left bottom, from(#539c3e), to(#a5d665));
+   background: -webkit-linear-gradient(top, #539c3e, #a5d665);
+   background: -moz-linear-gradient(top, #539c3e, #a5d665);
+   background: -ms-linear-gradient(top, #539c3e, #a5d665);
+   background: -o-linear-gradient(top, #539c3e, #a5d665);
+   padding: 10px 20px;
+   -webkit-border-radius: 15px;
+   -moz-border-radius: 15px;
+   border-radius: 15px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 15px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.buttonThing:hover {
+   border-top-color: #283978;
+   background: #283978;
+   color: #ccc;
+   }
+.buttonThing:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+#editLinkThing {
+  color: orange;
+ }
+
+
 
 .alert > td, .alert > th {
   background-color: red;
 }
 
-main > section > a {
+/*main > section > a {
   color: red;
-}
+}*/
 
 #noMedMessage {
   text-align: center;
 }
 
-fieldset1 {
-width :50%;
-float: left;
-padding : 0;
-padding-top:1cm;
-margin : 0;
-display : inline-block;
+/* Add Med Form */
+#addForm {
+  font-size: 20px;
 }
 
-fieldset2 {
-width :50%;
+#firstFields {
+width: 40%;
+float: left;
+/*padding: 0;*/
+padding-top:1cm;
+/*margin: 0;*/
+display: inline-block;
+
+}
+
+#secondFields {
+width :40%;
 float: right;
-padding : 0;
-padding-top:3cm;
-margin : 0;
-display : inline-block;
+/*padding: 0;*/
+padding-top: 55px;
+/*margin: 0;*/
+display: inline-block;
+}
+
+.formGroup {
+  border: none;
+}
+
+label {
+  display: block;
+}
+
+.containerForm {
+  position: relative;
+  margin-top: 50px;
+	overflow: auto;
+	width: 100%;
+  height: auto;
+
+}
+
+#disclaimer {
+  position: absolute;
+  top: 500px;
+}
+
+#actionGroup {
+  position: relative;
+  right: 60px;
+  margin-top: 10px;
+}
+
+#cancelThing {
+  position: absolute;
+  right: 90px;
+  top: 15px;
+  color: orange;
+}
+
+#save {
+  float: right;
+}
+
+/* End Add Med Form */
+
+/* Dashboard Page Button and Edit Link*/
+#thingsToDoGroup {
+  position: relative;
+}
+
+#editLinkThing {
+  poistion: absolute;
 }
 
 img {
@@ -87,23 +268,56 @@ img {
 
 #center{margin:0 auto;width:250px;}
 
+/* Footer */
 
+#footer {
+  text-align: center;
+  margin-top: 15px;
+  height: 20px;
+}
 
-p1 {
+#footer {
+  border-top: 1px solid grey;
+}
+
+#footer {
+  text-align: justify;
+}
+
+#footer a {
+  display: inline-block;
+  color: white;
+}
+
+#footer a:hover {
+  color: #44970D;
+}
+
+#footer:after {
+  content: '';
+  width: 100%;
+  display: inline-block;
+}
+
+.footLink:nth-child(1) {
+  margin-right: 20px;
+  padding-left: 40px;
+}
+
+.footLink:nth-child(4) {
+  padding-right: 40px;
+}
+
+.copyright {
+  text-align: center;
+}
+
+/*p1 {
  display:inline;
  word-wrap: break-word;
- color: black;
+ color: black;*/
 =======
-#logo
-{
-  height:127px;
-  width:960px;
-  background-color: white;
-}
-#logo img
-{
-  max-width:100%;
-  max-height:100%;
-  /*margin:auto;*/
-  display:block;
-}
+
+/*a {
+  color: orange;
+}*/

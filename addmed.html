@@ -4,121 +4,134 @@
     <meta charset="utf-8">
     <title>Add/Edit Medication</title>
     <link rel="stylesheet" href="css/style.css">
+    <div id="logo">
+      <img src="imgs/main_logo1.png">
+    </div>
   </head>
   <body>
     <header>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="medList.html">Medications</a></li>
-        <li><a href="archives.html">Archives</a></li>
-        <li><a href="aboutus.html">About Us</a></li>
-      </ul>
+      <div id="topNav">
+        <nav id="globalNav">
+          <a class="navLink" href="index.html">Home</a>
+          <a class="navLink" href="medList.html">Medications</a>
+          <a class="navLink" href="archives.html">Archives</a>
+          <a class="navLink" href="aboutus.html">About Us</a>
+        </nav>
+      </div>
     </header>
     <main>
-      <h1 class="title" id="addNewTitle" hidden="false">Add New Mediation</h1>
-      <h1 class="title" id="editMedTitle" hidden>Edit Medication</h1>
-      <section class="desc-block-left" id="medicationForm">
-        <form id="medForm">
-          <fieldset1>
-            <legend id="addForm">ADD NEW MEDICATION</legend>
-            <p>&nbsp</p>
-            <!-- <legend id="editForm" hidden>Edit</legend> -->
-            <input type="text" id="medName" placeholder="Medication Name" required />
+      <div class="containerForm">
+        <h1 class="title" id="addNewTitle" hidden="false">Add New Mediation</h1>
+        <h1 class="title" id="editMedTitle" hidden>Edit Medication</h1>
+        <section class="desc-block-left" id="medicationForm">
+          <form id="medForm">
+            <fieldset class="formGroup" id="firstFields">
+              <legend id="addForm">ADD NEW MEDICATION</legend>
+              <!-- <p>&nbsp</p> -->
+              <!-- <legend id="editForm" hidden>Edit</legend> -->
+              <input type="text" id="medName" placeholder="Medication Name" required />
               <br>
               <br>
-            <input type="text" id="docName" placeholder="Prescribing MD Name" />
+              <input type="text" id="docName" placeholder="Prescribing MD Name" />
               <br>
               <br>
-            <input type="number" id="dose" placeholder="Dosage" required/>
+              <input type="number" id="dose" placeholder="Dosage" required/>
               <br>
               <br>
-            <select class="medSelect" id="dosageType" name="dosageType">
-              <option value="default">Dosage Type</option>
-              <option value="Pills">Pills</option>
-              <option value="CC">cc</option>
-              <option value="ML">ml</option>
-              <option value="GR">gr</option>
-              <option value="MG">mg</option>
-              <option value="Drops">Drops</option>
-              <option value="Other">Other</option>
-            </select>
+              <select class="medSelect" id="dosageType" name="dosageType">
+                <option value="default">Dosage Type</option>
+                <option value="Pills">Pills</option>
+                <option value="CC">cc</option>
+                <option value="ML">ml</option>
+                <option value="GR">gr</option>
+                <option value="MG">mg</option>
+                <option value="Drops">Drops</option>
+                <option value="Other">Other</option>
+              </select>
               <br>
               <br>
-            <input type="number" id="numRx" placeholder="Number in Rx" />
+              <input type="number" id="numRx" placeholder="Number in Rx" />
               <br>
               <br>
-            <input type="date" id="startDate" placeholder="Start Date" required/>
+              <input type="date" id="startDate" placeholder="Start Date" required/>
               <br>
               <br>
-            <input type="text" id="duration" placeholder="Duration of Rx" />
+              <input type="text" id="duration" placeholder="Duration of Rx" />
               <br>
               <br>
-            <select class="interval" id="intervalTake" name="intervalTake" required>
-              <option value="default">Intervals</option>
-              <option value="daily">Every Day</option>
-              <option value="otherDay">Every Other Day</option>
-              <option value="thirdDay">Every Third Day</option>
-              <option value="weekly">Once a Week</option>
-              <option value="twoWeeks">Once Every Two Weeks</option>
-              <option value="monthly">Once a Month</option>
-            </select>
+              <select class="interval" id="intervalTake" name="intervalTake" required>
+                <option value="default">Intervals</option>
+                <option value="daily">Every Day</option>
+                <option value="otherDay">Every Other Day</option>
+                <option value="thirdDay">Every Third Day</option>
+                <option value="weekly">Once a Week</option>
+                <option value="twoWeeks">Once Every Two Weeks</option>
+                <option value="monthly">Once a Month</option>
+              </select>
               <br>
               <br>
-            <label for="firstTake">First Time Taken</label>
-            <input type="time" id="firstTake" placeholder="First Time Taken" required/>
+              <label for="firstTake">First Time Taken</label>
+              <input type="time" id="firstTake" placeholder="First Time Taken" required/>
               <!-- <br>
               <br>
-            <label for="secondTake">Second Time Taken</label>
-            <input type="time" id="secondTake" placeholder="Second Time Taken" />
+              <label for="secondTake">Second Time Taken</label>
+              <input type="time" id="secondTake" placeholder="Second Time Taken" />
               <br>
               <br>
-            <label for="thirdTake">Third Time Taken</label>
-            <input type="time" id="thirdTake" placeholder="Third Time Taken" /> -->
+              <label for="thirdTake">Third Time Taken</label>
+              <input type="time" id="thirdTake" placeholder="Third Time Taken" /> -->
               <br>
               <br>
-            <select class="foodSelect" id="foodInstructions" name="food">
-              <option value="default">Food Instructions</option>
-              <option value="with">With Food</option>
-              <option value="before">Before Food</option>
-            </select>
-            <!-- <label><input type="checkbox" id="withFood" value="takeWith" required> Take With Food</label>
+              <select class="foodSelect" id="foodInstructions" name="food">
+                <option value="default">Food Instructions</option>
+                <option value="with">With Food</option>
+                <option value="before">Before Food</option>
+              </select>
+              <!-- <label><input type="checkbox" id="withFood" value="takeWith" required> Take With Food</label>
               <br>
-            <label><input type="checkbox" id="beforeFood" value="takeBefore" required> Take Before Food</label> -->
+              <label><input type="checkbox" id="beforeFood" value="takeBefore" required> Take Before Food</label> -->
               <br>
-            </fieldset1>
+            </fieldset>
           </section>
-      <section class="desc-block-right">
-        <fieldset2>
-            <input type="number" id="numRefills" placeholder="Number of Refills" />
-            <br>
-            <br>
-            <input type="text" id="pharmName" placeholder="Pharmacy Name" />
-            <br>
-            <br>
-            <input type="tel" id="pharmNumber" placeholder="Pharmacy Phone" />
-            <br>
-            <br>
-            <label><input type="checkbox" id="noLongerTaking" value="doneTaking"> No Longer Taking This</label>
-            <br>
+          <section class="desc-block-right">
+            <fieldset class="formGroup" id="secondFields">
+              <input type="number" id="numRefills" placeholder="Number of Refills" />
+              <br>
+              <br>
+              <input type="text" id="pharmName" placeholder="Pharmacy Name" />
+              <br>
+              <br>
+              <input type="tel" id="pharmNumber" placeholder="Pharmacy Phone" />
+              <br>
+              <br>
+              <label><input type="checkbox" id="noLongerTaking" value="doneTaking"> No Longer Taking This</label>
+              <br>
 
-            <label><input type="checkbox" id="addSched" value="addToSchedule"> Add to My Current Schedule</label>
-            <br>
-            <br>
-            <textarea id="medNotes" rows="4" cols="50">Additional Notes </textarea>
-            <br>
-            <a href="medList.html"> Cancel </a>
-
-            <br>
-            <br>
-            <input type="submit" value="Save" id="save" />
-        </fieldset2>
-        </form>
-      </section>
-      </main>
-      <p>&nbsp</p>
-    <section id="disclaimer">
-      <p>Please take all medications as directed by your prescribing physician.  If you experience any negative side effects, please contact your doctor immediately.  If you miss a dosage, please contact your physician as soon as possible.  For all other emergencies, please call 911 or go to your nearest emergency room.</p>
-    </section>
+              <label><input type="checkbox" id="addSched" value="addToSchedule"> Add to My Current Schedule</label>
+              <br>
+              <br>
+              <textarea id="medNotes" rows="4" cols="50">Additional Notes </textarea>
+              <br>
+              <section id="actionGroup">
+                <a id="cancelThing" href="medList.html"> Cancel </a>
+                <input class="buttonThing" type="submit" value="Save" id="save" />
+              </section>
+            </fieldset2>
+          </form>
+        </section>
+        <section id="disclaimer">
+          <p>Please take all medications as directed by your prescribing physician.  If you experience any negative side effects, please contact your doctor immediately.  If you miss a dosage, please contact your physician as soon as possible.  For all other emergencies, please call 911 or go to your nearest emergency room.</p>
+        </section>
+      </div>
+    </main>
+    <div id="footer" align="center">
+      <p class="copyright">&copy; 2016 MedTracker</p>
+        <a class="footLink" href="index.html">Home</a>
+        <a class="footLink" href="medList.html">Medications</a>
+        <a class="footLink" href="archives.html">Archives</a>
+        <a class="footLink" href="aboutus.html">About Us</a>
+    </div>
+      <!-- <p>&nbsp</p> -->
     <script type="text/javascript" src="js/addmed.js"></script>
   </body>
 </html>
