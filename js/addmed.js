@@ -34,7 +34,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
 var formEl = document.getElementById('medForm');
 formEl.addEventListener('submit', function(event) {
   event.preventDefault();
-  var newName = event.target.medName.value;
+  var newName = event.target.medName.value.charAt(0).toUpperCase() + event.target.medName.value.slice(1).toLowerCase();
   var newPrescriber = event.target.docName.value;
   var newDosage = event.target.dose.value;
   var newDoseType = event.target.dosageType.value;
