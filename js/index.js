@@ -109,6 +109,14 @@ var schedule = {
     }
   },
 
+  skipEvent: function (element) {
+    var removeTr = element.parentNode.parentNode.parentNode;
+    if (removeTr.id === medications[obj].name + 'Alert') {
+      tableEl.removeChild(removeTr);
+      console.log(medications[obj].pillsLeft);
+    }
+  },
+
   displayChart: function() {
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -130,6 +138,8 @@ tableEl.addEventListener('click', function(event) {
       schedule.clickMedName();
     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
       schedule.tookEvent(event.target);
+    } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+      schedule.skipEvent(event.target);
     }
   }
 });
@@ -139,7 +149,7 @@ schedule.displayChart();
 function renderRefills(){
   var refMsg = document.getElementById('refills');
   for(obj in medications) {
-    if(medications[obj].quantity < 10) {
+    if(medications[obj].pillsLeft < 10) {
       var userMessageRefills = document.createElement('p');
       console.log('created the p');
       userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
