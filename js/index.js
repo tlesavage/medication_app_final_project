@@ -101,12 +101,12 @@ var schedule = {
 
   tookEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
-    if (removeTr.id === medications[obj].name + 'Alert') {
+    if (removeTr.id === todaysMeds[obj].name + 'Alert') {
       tableEl.removeChild(removeTr);
-      console.log(medications[obj].pillsLeft);
-      medications[obj].pillsLeft = medications[obj].pillsLeft - medications[obj].dosage;
-      console.log(medications[obj].pillsLeft);
-      localStorage.setItem('drugArray', JSON.stringify(medications));
+      console.log(todaysMeds[obj].pillsLeft);
+      todaysMeds[obj].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
+      console.log(todaysMeds[obj].pillsLeft);
+      localStorage.setItem('drugArray', JSON.stringify(todaysMeds));
     }
   },
 
@@ -166,7 +166,7 @@ tableEl.addEventListener('click', function(event) {
   for(obj in todaysMeds) {
     if (event.target.id === todaysMeds[obj].name) {
       schedule.clickMedName();
-    } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+    } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.tookEvent(event.target);
     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
       schedule.skipEvent(event.target);
