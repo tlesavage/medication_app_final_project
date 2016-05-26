@@ -40,7 +40,7 @@ Medication.renderUpNextTable = function() {
       trEl.id = medications[meds].name + 'Alert';
 
       var medNameThEl = document.createElement('th');
-      medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name.charAt(0).toUpperCase() + medications[meds].name.slice(1) + '</a>';
+      medNameThEl.innerHTML = '<a href="addmed.html" id=' + medications[meds].name + '>' + medications[meds].name + '</a>';
       trEl.appendChild(medNameThEl);
 
       var timeNextTdEl = document.createElement('td');
