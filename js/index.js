@@ -1,7 +1,8 @@
 var date = new Date();
 var medications = [];
 var todaysMeds = [];
-var quantityTaken = [40];
+
+var quantityTaken = 0;
 var quantitySkipped = 0;
 
 var tableEl = document.getElementById('upNextTable');
@@ -16,10 +17,7 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.duration = duration;
   this.intervals = intervals;
   this.first = first;
-  // this.second = second;
-  // this.third = third;
   this.food = food;
-  // this.beforeFood = beforeFood;
   this.numRefills = numRefills;
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;
@@ -31,8 +29,6 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
 };
 
 Medication.renderUpNextTable = function() {
-  //Also at this time the page will be displaying all current medications in no particular order
-  //Need to arrange medications array by time to take somehow.
   document.getElementById('noMedMessage').hidden = true;
   tableEl.hidden = false;
 
@@ -102,7 +98,6 @@ var schedule = {
 
     for(item in medications) {
       if (todaysMeds[obj] === medications[item]) {
-          // console.log("you found two meds that are the same");
           // console.log(medications[item].pillsLeft);
         medications[item].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
           // console.log(medications[item].pillsLeft + 'new');
@@ -115,14 +110,9 @@ var schedule = {
 
   skipEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
-    // if (removeTr.id === todaysMeds[obj].name + 'Alert') {
     tableEl.removeChild(removeTr);
-      // console.log(todaysMeds[obj].pillsLeft);
-      // console.log(todaysMeds);
     todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
     localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
-      // console.log(todaysMeds);
-    // }
   },
 
   renderRefills: function() {
