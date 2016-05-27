@@ -2,8 +2,8 @@ var date = new Date();
 var medications = [];
 var todaysMeds = [];
 
-var quantityTaken = 3;
-var quantitySkipped = 4;
+var quantityTaken = 0;
+var quantitySkipped = 0;
 
 var tableEl = document.getElementById('upNextTable');
 
@@ -62,25 +62,11 @@ var schedule = {
     datasets: [
       {
         label: 'Adherence',
-        backgroundColor: '#00c52c',
-        data: [quantityTaken, quantitySkipped]
+        backgroundColor: ['#00c52c', 'red'],
+        data: []
       }
     ]
   },
-  // data: {
-  //   labels: ['Taken'],
-  //   datasets: [{
-  //     label: 'Taken vs Skipped',
-  //     backgrounColor: '#00c52c',
-  //     data: quantityTaken
-  //   },
-  //     {
-  //       labels: ['Skipped'],
-  //       fillColor: '#9f2c0c',
-  //       data: quantitySkipped
-  //     }
-  //   ]
-  // },
 
   alertMed: function() {
     var currentTime = [date.getHours(), date.getMinutes()];
@@ -125,6 +111,7 @@ var schedule = {
     localStorage.setItem('drugArray', JSON.stringify(medArr));
 
     quantityTaken += 1;
+    schedule.data.datasets[0].data[0] = quantityTaken;
     schedule.displayChart();
 
     localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
@@ -142,6 +129,7 @@ var schedule = {
     localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
 
     quantitySkipped += 1;
+    schedule.data.datasets[0].data[1] = quantitySkipped;
     schedule.displayChart();
 
     localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
@@ -218,4 +206,4 @@ tableEl.addEventListener('click', function(event) {
   }
 });
 
-schedule.displayChart();
+// schedule.displayChart();
