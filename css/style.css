@@ -88,7 +88,7 @@ h3 {
   max-width: 50%;
   float: right;
   right: 20px;
-  bottom: 35px;
+  bottom: 135px;
 }
 
 /* End Chart */
@@ -324,7 +324,7 @@ img {
 
 footer {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 200px;
   height: 20px;
 }
 

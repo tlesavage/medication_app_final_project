@@ -59,16 +59,13 @@ Medication.renderUpNextTable = function() {
 var schedule = {
   data: {
     labels: ['Taken', 'Skipped'],
-    datasets: [{
-      label: 'Taken vs Skipped',
-      backgrounColor: '#00c52c',
-      data: quantityTaken
-    },
-      // {
-      //   label: 'Skipped',
-      //   fillColor: '#9f2c0c',
-      //   data: quantitySkipped
-      ]
+    datasets: [
+      {
+        label: 'Adherence',
+        backgroundColor: ['#00c52c', 'red'],
+        data: []
+      }
+    ]
   },
 
   alertMed: function() {
@@ -112,6 +109,12 @@ var schedule = {
     }
     localStorage.setItem('todaysMedsStored', JSON.stringify(todayArr));
     localStorage.setItem('drugArray', JSON.stringify(medArr));
+
+    quantityTaken += 1;
+    schedule.data.datasets[0].data[0] = quantityTaken;
+    schedule.displayChart();
+
+    localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
   },
 
   skipEvent: function(element) {
@@ -123,8 +126,13 @@ var schedule = {
     } else {
       todaysMeds.splice(obj, obj);
     }
-
     localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+
+    quantitySkipped += 1;
+    schedule.data.datasets[0].data[1] = quantitySkipped;
+    schedule.displayChart();
+
+    localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
   },
 
   renderRefills: function() {
