@@ -59,13 +59,11 @@ Medication.renderUpNextTable = function() {
 var schedule = {
   data: {
     labels: ['Taken', 'Skipped'],
-    datasets: [
-      {
-        label: 'Adherence',
-        backgroundColor: ['#00c52c', 'red'],
-        data: []
-      }
-    ]
+    datasets: [{
+      label: 'Adherence',
+      backgroundColor: ['#00c52c', 'red'],
+      data: [0, 0, 0]
+    }]
   },
 
   alertMed: function() {
@@ -132,7 +130,7 @@ var schedule = {
     schedule.data.datasets[0].data[1] = quantitySkipped;
     schedule.displayChart();
 
-    localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
+    localStorage.setItem('chartSkippedData', JSON.stringify(quantitySkipped));
   },
 
   renderRefills: function() {
@@ -161,6 +159,18 @@ var schedule = {
 
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
+
+  if (localStorage.chartTakenData) {
+    quantityTaken = JSON.parse(localStorage.getItem('chartTakenData'));
+    schedule.data.datasets[0].data[0] = quantityTaken;
+    schedule.displayChart();
+  }
+
+  if (localStorage.chartSkippedData) {
+    quantitySkipped = JSON.parse(localStorage.getItem('chartSkippedData'));
+    schedule.data.datasets[0].data[1] = quantitySkipped;
+    schedule.displayChart();
+  }
 
   if (localStorage.storedDate) {
     var lastLoginDate = JSON.parse(localStorage.getItem('storedDate'));
