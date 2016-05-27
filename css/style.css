@@ -111,6 +111,7 @@ h3 {
   border-spacing: 0px;
   margin-top: 20px;
   margin-bottom: 70px;
+  border-radius: 10px;
 }
 
 .medicationTableView th, td {
