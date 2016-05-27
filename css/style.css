@@ -82,11 +82,13 @@ h3 {
 
 /* Chart */
 #myChart {
-  position: absolute;
-  max-width: 50%;
+  width: 100%;
+}
+
+#streak {
   float: right;
-  right: 20px;
-  bottom: 35px;
+  width: 45%;
+  margin-bottom: 75px;
 }
 
 /* End Chart */
@@ -104,6 +106,7 @@ h3 {
 /* All Tables */
 
 .medicationTableView {
+  background-color: white;
   width: 100%;
   border-spacing: 0px;
   margin-top: 20px;
@@ -172,6 +175,10 @@ h3 {
   width: 45%;
   padding: 10px;
   margin-bottom: 75px;
+  float: left;
+  background-color: white;
+  color: black;
+  border-radius: 50px;
 }
 
 #thingsToDoGroup {
@@ -199,7 +206,7 @@ h3 {
 }
 
 .alert > td, .alert > th {
-  background-color: #c02b44;
+  background-color: #ff9999;
 }
 
 #noMedMessage {
@@ -296,11 +303,19 @@ img {
 }
 
 /* About Us */
-#container{width:100%;}
+#container{
+  width:100%;
+}
 
-#left{float:left;width:250px;}
+#left{
+  float:left;
+  width:250px;
+}
 
-#right{float:right;width:250px;}
+#right{
+  float:right;
+  width:250px;
+}
 
 #center{margin:0 auto;width:250px;}
 
@@ -312,14 +327,9 @@ footer {
   text-align: center;
   margin-top: 15px;
   height: 20px;
-}
-
-footer {
   border-top: 1px solid grey;
-}
-
-footer {
   text-align: justify;
+  clear: both;
 }
 
 footer a {
