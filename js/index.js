@@ -1,32 +1,8 @@
 var date = new Date();
-var medications = [];
 var todaysMeds = [];
-
 var quantityTaken = 0;
 var quantitySkipped = 0;
-
 var tableEl = document.getElementById('upNextTable');
-
-function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, food, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
-  this.name = name;
-  this.prescriber = prescriber;
-  this.dosage = dosage;
-  this.doseType = doseType;
-  this.quantity = quantity;
-  this.start = start;
-  this.duration = duration;
-  this.intervals = intervals;
-  this.first = first;
-  this.food = food;
-  this.numRefills = numRefills;
-  this.pharmName = pharmName;
-  this.pharmPhone = pharmPhone;
-  this.taking = taking;
-  this.pillsLeft = quantity;
-  this.addCurrSched = addCurrSched;
-  this.notes = notes;
-  medications.push(this);
-};
 
 Medication.renderUpNextTable = function() {
   document.getElementById('noMedMessage').hidden = true;
@@ -59,13 +35,11 @@ Medication.renderUpNextTable = function() {
 var schedule = {
   data: {
     labels: ['Taken', 'Skipped'],
-    datasets: [
-      {
-        label: 'Adherence',
-        backgroundColor: ['#00c52c', 'red'],
-        data: []
-      }
-    ]
+    datasets: [{
+      label: 'Adherence',
+      backgroundColor: ['#00c52c', 'red'],
+      data: [0, 0, 0]
+    }]
   },
 
   alertMed: function() {
@@ -105,7 +79,7 @@ var schedule = {
     if(todayArr[idx] === todayArr[0]) {
       todayArr.shift();
     } else {
-      todayArr.splice(idx, idx); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+      todayArr.splice(idx, idx);
     }
     localStorage.setItem('todaysMedsStored', JSON.stringify(todayArr));
     localStorage.setItem('drugArray', JSON.stringify(medArr));
@@ -117,22 +91,22 @@ var schedule = {
     localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
   },
 
-  skipEvent: function(element) {
+  skipEvent: function(element, todayArr, idx) {
     var removeTr = element.parentNode.parentNode.parentNode;
     tableEl.removeChild(removeTr);
 
-    if(todaysMeds[obj] === todaysMeds[0]) {
-      todaysMeds.shift();
+    if(todayArr[idx] === todayArr[0]) {
+      todayArr.shift();
     } else {
-      todaysMeds.splice(obj, obj);
+      todayArr.splice(idx, idx);
     }
-    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    localStorage.setItem('todaysMedsStored', JSON.stringify(todayArr));
 
     quantitySkipped += 1;
     schedule.data.datasets[0].data[1] = quantitySkipped;
     schedule.displayChart();
 
-    localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
+    localStorage.setItem('chartSkippedData', JSON.stringify(quantitySkipped));
   },
 
   renderRefills: function() {
@@ -144,7 +118,7 @@ var schedule = {
 
         var userMessageRefills = document.createElement('p');
         console.log('created the p');
-        userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
+        userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].pillsLeft/medications[obj].dosage + ' days.';
         refMsg.appendChild(userMessageRefills);
       }
     }
@@ -161,6 +135,18 @@ var schedule = {
 
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
+
+  if (localStorage.chartTakenData) {
+    quantityTaken = JSON.parse(localStorage.getItem('chartTakenData'));
+    schedule.data.datasets[0].data[0] = quantityTaken;
+    schedule.displayChart();
+  }
+
+  if (localStorage.chartSkippedData) {
+    quantitySkipped = JSON.parse(localStorage.getItem('chartSkippedData'));
+    schedule.data.datasets[0].data[1] = quantitySkipped;
+    schedule.displayChart();
+  }
 
   if (localStorage.storedDate) {
     var lastLoginDate = JSON.parse(localStorage.getItem('storedDate'));
@@ -201,9 +187,7 @@ tableEl.addEventListener('click', function(event) {
     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.tookEvent(event.target, todaysMeds, obj, medications);
     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
-      schedule.skipEvent(event.target);
+      schedule.skipEvent(event.target, todaysMeds, obj);
     }
   }
 });
-
-// schedule.displayChart();

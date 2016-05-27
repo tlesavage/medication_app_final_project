@@ -1,35 +1,8 @@
-var medications = [];
-
 if (localStorage.drugArray) {
   medications = JSON.parse(localStorage.getItem('drugArray'));
 } else {
   medications = [];
 }
-
-function Medication (name, prescriber, dosage, doseType, quantity, start, duration, intervals, first, food, numRefills, pharmName, pharmPhone, taking, addCurrSched, notes) {
-  this.name = name;
-  this.prescriber = prescriber;
-  this.dosage = dosage;
-  this.doseType = doseType;
-  this.quantity = quantity;
-  this.start = start;
-  this.duration = duration;
-  this.intervals = intervals;
-  this.first = first;
-  // this.second = second;
-  // this.third = third;
-  this.food = food;
-  // this.beforeFood = beforeFood;
-  this.numRefills = numRefills;
-  this.pharmName = pharmName;
-  this.pharmPhone = pharmPhone;
-  this.taking = taking;
-  this.pillsLeft = quantity; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
-  this.addCurrSched = addCurrSched;
-  this.notes = notes;
-  medications.push(this);
-  // Medication.renderCurrTable(this);
-};
 
 var formEl = document.getElementById('medForm');
 formEl.addEventListener('submit', function(event) {
@@ -43,10 +16,7 @@ formEl.addEventListener('submit', function(event) {
   var newDuration = event.target.duration.value;
   var newIntervals = event.target.intervalTake.value;
   var newFirst = event.target.firstTake.value;
-  // var newSecond = event.target.secondTake.value;
-  // var newThird = event.target.thirdTake.value;
   var newFood = event.target.food.value;
-  // var newBeforeFood = event.target.beforeFood.checked;
   var newNumRefills = event.target.numRefills.value;
   var newPharmName = event.target.pharmName.value;
   var newPharmPhone = event.target.pharmNumber.value;
@@ -55,6 +25,16 @@ formEl.addEventListener('submit', function(event) {
   var newNotes = event.target.medNotes.value;
   var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
   formEl.reset();
+
+  if(localStorage.todaysMedsStored) {
+    if(newDrug.taking === false) {
+      var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+      console.log(todaysMeds);
+      todaysMeds.push(newDrug);
+      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    }
+  }
+
   var jsonMed = JSON.stringify(medications);
   console.log(jsonMed);
   localStorage.setItem('drugArray', jsonMed);
@@ -72,10 +52,7 @@ Medication.renderEditFields = function () {
     duration.value = drugNameClicked.duration;
     intervalTake.value = drugNameClicked.intervals;
     firstTake.value = drugNameClicked.first;
-    // secondTake.value = drugNameClicked.second;
-    // thirdTake.value = drugNameClicked.third;
     foodInstructions.value = drugNameClicked.food;
-    // beforeFood.checked = drugNameClicked.beforeFood;
     numRefills.value = drugNameClicked.numRefills;
     pharmName.value = drugNameClicked.pharmName;
     pharmNumber.value = drugNameClicked.pharmPhone;
