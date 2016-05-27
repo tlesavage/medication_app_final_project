@@ -58,14 +58,17 @@ Medication.renderUpNextTable = function() {
 
 var schedule = {
   data: {
-    labels: ['Taken'],
-    datasets: [
-      {
-        label: 'Your History',
-        backgroundColor: '#d5f4f0',
-        data: quantityTaken
-      }
-    ]
+    labels: ['Taken', 'Skipped'],
+    datasets: [{
+      label: 'Taken vs Skipped',
+      backgrounColor: '#00c52c',
+      data: quantityTaken
+    },
+      // {
+      //   label: 'Skipped',
+      //   fillColor: '#9f2c0c',
+      //   data: quantitySkipped
+      ]
   },
 
   alertMed: function() {
