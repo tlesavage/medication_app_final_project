@@ -25,6 +25,12 @@ formEl.addEventListener('submit', function(event) {
   var newNotes = event.target.medNotes.value;
   var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
   formEl.reset();
+
+  var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+  console.log(todaysMeds);
+  todaysMeds.push(newDrug);
+  localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+
   var jsonMed = JSON.stringify(medications);
   console.log(jsonMed);
   localStorage.setItem('drugArray', jsonMed);
