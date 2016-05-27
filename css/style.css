@@ -1,5 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
+body {
+  max-width: 960px;
+  position: relative;
+  margin: 0 auto;
+  /*background-color: #004a69;*/
+  /*background-color: #88bbd6;*/
+  background: transparent linear-gradient(to right, #70BFD5 0%, #71C1D7 44%, #7ED5E9 100%) repeat scroll 0% 0%;
+  color: white;
+}
+
+.clearfix {
+  overflow: auto;
+}
 
 #logo {
   height:127px;
@@ -48,12 +61,6 @@
 
 /* End Global Nav */
 
-body {
-  max-width: 960px;
-  margin: 0 auto;
-  background-color: #004a69;
-  color: white;
-}
 
 /*Controls and Fonts*/
 
@@ -73,8 +80,19 @@ h3 {
   font-size: 10px;
 }
 
+#myChart {
+  position: absolute;
+  max-width: 50%;
+  float: right;
+  right: 20px;
+  bottom: 35px;
+}
+
+
+
 #upNextSec {
   margin-top: 50px;
+  margin-bottom: 145px;
 }
 /*
 ul {
@@ -118,7 +136,7 @@ li a:hover {
 }
 
 .medicationTableView a {
-  color: orange;
+  color: #7C7062;
 }
 
 .medicationTableView a:hover {
@@ -260,6 +278,7 @@ img {
   max-height: 100px;
 }
 
+/* About Us */
 #container{width:100%;}
 
 #left{float:left;width:250px;}
@@ -268,32 +287,34 @@ img {
 
 #center{margin:0 auto;width:250px;}
 
+/* End Abut Us */
+
 /* Footer */
 
-#footer {
+footer {
   text-align: center;
   margin-top: 15px;
   height: 20px;
 }
 
-#footer {
+footer {
   border-top: 1px solid grey;
 }
 
-#footer {
+footer {
   text-align: justify;
 }
 
-#footer a {
+footer a {
   display: inline-block;
   color: white;
 }
 
-#footer a:hover {
+footer a:hover {
   color: #44970D;
 }
 
-#footer:after {
+footer:after {
   content: '';
   width: 100%;
   display: inline-block;
