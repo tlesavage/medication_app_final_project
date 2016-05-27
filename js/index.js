@@ -49,7 +49,7 @@ Medication.renderUpNextTable = function() {
     trEl.appendChild(timeNextTdEl);
 
     var dosageTdEl = document.createElement('td');
-    dosageTdEl.textContent = todaysMeds[meds].dosage;
+    dosageTdEl.textContent = todaysMeds[meds].dosage + ' ' + todaysMeds[meds].doseType;
     trEl.appendChild(dosageTdEl);
 
     var adherenceTdEl = document.createElement('td');
@@ -97,31 +97,46 @@ var schedule = {
 
   tookEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
-    if (removeTr.id === todaysMeds[obj].name + 'Alert') {
-      tableEl.removeChild(removeTr);
-      console.log(todaysMeds[obj].pillsLeft);
-      todaysMeds[obj].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
-      for(item in medications) {
-        if (todaysMeds[obj] === medications[item]) {
-          medications[item].pillsLeft = todaysMeds[obj].pillsLeft;
-        }
+
+    tableEl.removeChild(removeTr);
+
+    for(item in medications) {
+      if (todaysMeds[obj] === medications[item]) {
+          // console.log("you found two meds that are the same");
+          // console.log(medications[item].pillsLeft);
+        medications[item].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
+          // console.log(medications[item].pillsLeft + 'new');
       }
-      console.log(todaysMeds[obj].pillsLeft);
-      todaysMeds.pop(todaysMeds[obj]);
-      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
-      localStorage.setItem('drugArray', JSON.stringify(medications));
     }
+    todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    localStorage.setItem('drugArray', JSON.stringify(medications));
   },
 
   skipEvent: function(element) {
     var removeTr = element.parentNode.parentNode.parentNode;
-    if (removeTr.id === todaysMeds[obj].name + 'Alert') {
-      tableEl.removeChild(removeTr);
-      console.log(todaysMeds[obj].pillsLeft);
-      console.log(todaysMeds);
-      todaysMeds.pop(todaysMeds[obj]);
-      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
-      console.log(todaysMeds);
+    // if (removeTr.id === todaysMeds[obj].name + 'Alert') {
+    tableEl.removeChild(removeTr);
+      // console.log(todaysMeds[obj].pillsLeft);
+      // console.log(todaysMeds);
+    todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+      // console.log(todaysMeds);
+    // }
+  },
+
+  renderRefills: function() {
+    var refMsg = document.getElementById('refills');
+    for(obj in medications) {
+      if(medications[obj].taking === false && medications[obj].pillsLeft < 10) {
+        var noRefPEl = document.getElementById('noRefills');
+        noRefPEl.hidden = true;
+
+        var userMessageRefills = document.createElement('p');
+        console.log('created the p');
+        userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
+        refMsg.appendChild(userMessageRefills);
+      }
     }
   },
 
@@ -157,16 +172,16 @@ if (localStorage.drugArray) {
         todaysMeds.push(medications[meds]);
       }
     }
-
     var jsonTodayMeds = JSON.stringify(todaysMeds);
     localStorage.setItem('todaysMedsStored', jsonTodayMeds);
 
     var currentDate = [date.getMonth(), date.getDate()];
-    console.log(currentDate);
     localStorage.setItem('storedDate', JSON.stringify(currentDate));
   }
+
   Medication.renderUpNextTable();
   schedule.alertMed();
+  schedule.renderRefills();
 }
 
 tableEl.addEventListener('click', function(event) {
@@ -175,24 +190,10 @@ tableEl.addEventListener('click', function(event) {
       schedule.clickMedName();
     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.tookEvent(event.target);
-    } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === medications[obj].name + 'Alert') {
+    } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.skipEvent(event.target);
     }
   }
 });
 
 // schedule.displayChart();
-
-function renderRefills(){
-  var refMsg = document.getElementById('refills');
-  for(obj in medications) {
-    if(medications[obj].pillsLeft < 10) {
-      var userMessageRefills = document.createElement('p');
-      console.log('created the p');
-      userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].quantity + ' days.';
-      refMsg.appendChild(userMessageRefills);
-    }
-  }
-};
-
-renderRefills();
