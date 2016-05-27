@@ -103,7 +103,7 @@ var schedule = {
     if(todayArr[idx] === todayArr[0]) {
       todayArr.shift();
     } else {
-      todayArr.splice(idx, idx); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+      todayArr.splice(idx, idx);
     }
     localStorage.setItem('todaysMedsStored', JSON.stringify(todayArr));
     localStorage.setItem('drugArray', JSON.stringify(medArr));

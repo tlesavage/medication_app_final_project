@@ -16,19 +16,15 @@ function Medication (name, prescriber, dosage, doseType, quantity, start, durati
   this.duration = duration;
   this.intervals = intervals;
   this.first = first;
-  // this.second = second;
-  // this.third = third;
   this.food = food;
-  // this.beforeFood = beforeFood;
   this.numRefills = numRefills;
   this.pharmName = pharmName;
   this.pharmPhone = pharmPhone;
   this.taking = taking;
-  this.pillsLeft = quantity; // this has to be this.quantity - this.dosage anytime a user clicks 'taken' within the UpNextTable.
+  this.pillsLeft = quantity;
   this.addCurrSched = addCurrSched;
   this.notes = notes;
   medications.push(this);
-  // Medication.renderCurrTable(this);
 };
 
 var formEl = document.getElementById('medForm');
@@ -43,10 +39,7 @@ formEl.addEventListener('submit', function(event) {
   var newDuration = event.target.duration.value;
   var newIntervals = event.target.intervalTake.value;
   var newFirst = event.target.firstTake.value;
-  // var newSecond = event.target.secondTake.value;
-  // var newThird = event.target.thirdTake.value;
   var newFood = event.target.food.value;
-  // var newBeforeFood = event.target.beforeFood.checked;
   var newNumRefills = event.target.numRefills.value;
   var newPharmName = event.target.pharmName.value;
   var newPharmPhone = event.target.pharmNumber.value;
@@ -72,10 +65,7 @@ Medication.renderEditFields = function () {
     duration.value = drugNameClicked.duration;
     intervalTake.value = drugNameClicked.intervals;
     firstTake.value = drugNameClicked.first;
-    // secondTake.value = drugNameClicked.second;
-    // thirdTake.value = drugNameClicked.third;
     foodInstructions.value = drugNameClicked.food;
-    // beforeFood.checked = drugNameClicked.beforeFood;
     numRefills.value = drugNameClicked.numRefills;
     pharmName.value = drugNameClicked.pharmName;
     pharmNumber.value = drugNameClicked.pharmPhone;
