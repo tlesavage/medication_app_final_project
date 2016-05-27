@@ -92,20 +92,19 @@ var schedule = {
   },
 
   tookEvent: function(element) {
-    var removeTr = element.parentNode.parentNode.parentNode;
-
-    tableEl.removeChild(removeTr);
-
-    for(item in medications) {
-      if (todaysMeds[obj] === medications[item]) {
-          // console.log(medications[item].pillsLeft);
-        medications[item].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
-          // console.log(medications[item].pillsLeft + 'new');
-      }
-    }
-    todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
-    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
-    localStorage.setItem('drugArray', JSON.stringify(medications));
+    // var removeTr = element.parentNode.parentNode.parentNode;
+    // tableEl.removeChild(removeTr);
+    //
+    // for(item in medications) {
+    //   if (todaysMeds[obj] === medications[item]) {
+    //     console.log(medications[item].pillsLeft + ' old');
+    //     medications[item].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
+    //     console.log(medications[item].pillsLeft + ' new');
+    //   }
+    // }
+    // todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+    // localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    // localStorage.setItem('drugArray', JSON.stringify(medications));
   },
 
   skipEvent: function(element) {
@@ -179,7 +178,20 @@ tableEl.addEventListener('click', function(event) {
     if (event.target.id === todaysMeds[obj].name) {
       schedule.clickMedName();
     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
-      schedule.tookEvent(event.target);
+      // schedule.tookEvent(event.target);
+      var removeTr = event.target.parentNode.parentNode.parentNode;
+      tableEl.removeChild(removeTr);
+
+      for(item in medications) {
+        if (todaysMeds[obj] === medications[item]) {
+          console.log(medications[item].pillsLeft + ' old');
+          medications[item].pillsLeft = todaysMeds[obj].pillsLeft - todaysMeds[obj].dosage;
+          console.log(medications[item].pillsLeft + ' new');
+        }
+      }
+      todaysMeds.splice(obj, obj); //DOESNT WANT TO REMOVE OBJECT AT INDEX 0 HALLLLP // SOMETIMES TWO OBJECTS ARE DELETED
+      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+      localStorage.setItem('drugArray', JSON.stringify(medications));
     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.skipEvent(event.target);
     }
