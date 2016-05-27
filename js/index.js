@@ -118,7 +118,7 @@ var schedule = {
 
         var userMessageRefills = document.createElement('p');
         console.log('created the p');
-        userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].pillsLeft/medications[obj].dosage + ' days.';
+        userMessageRefills.textContent = 'You need to refill ' + medications[obj].name + ' in the next ' + medications[obj].pillsLeft / medications[obj].dosage + ' days.';
         refMsg.appendChild(userMessageRefills);
       }
     }
