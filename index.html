@@ -3,7 +3,6 @@
   <head>
     <title>MedTracker</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.min.js'></script>
     <div id="logo">
       <img src="imgs/main_logo1.png">
@@ -33,7 +32,7 @@
           </tr>
         </table>
       </section>
-      <section class="containerLeft" id="recentAdd">
+      <section class="containerLeft">
         <h1>Your Upcoming Refills</h1>
         <section id="refills">
           <p id='noRefills'>You have no medications needing a refill.</p>
@@ -41,8 +40,9 @@
         <section id="thingsToDoGroup">
           <a id="editLinkThing" href="addmed.html" id="editMeds">Edit Current Medications</a>
           <form action="addMed.html">
-            <input id="addDrugsButton" class="buttonThing" type="submit" value="Add Medication"></form>
-          </section>
+            <input id="addDrugsButton" class="buttonThing" type="submit" value="Add Medication">
+          </form>
+        </section>
       </section>
       <section class="containerRight" id="streak">
         <canvas id="myChart" width="150" height="100"></canvas>
@@ -57,5 +57,4 @@
     </footer>
     <script type="text/javascript" src="js/index.js"></script>
   </body>
-
 </html>
