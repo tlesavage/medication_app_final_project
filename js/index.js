@@ -115,16 +115,16 @@ var schedule = {
     localStorage.setItem('chartTakenData', JSON.stringify(quantityTaken));
   },
 
-  skipEvent: function(element) {
+  skipEvent: function(element, todayArr, idx) {
     var removeTr = element.parentNode.parentNode.parentNode;
     tableEl.removeChild(removeTr);
 
-    if(todaysMeds[obj] === todaysMeds[0]) {
-      todaysMeds.shift();
+    if(todayArr[idx] === todayArr[0]) {
+      todayArr.shift();
     } else {
-      todaysMeds.splice(obj, obj);
+      todayArr.splice(idx, idx);
     }
-    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    localStorage.setItem('todaysMedsStored', JSON.stringify(todayArr));
 
     quantitySkipped += 1;
     schedule.data.datasets[0].data[1] = quantitySkipped;
@@ -211,9 +211,7 @@ tableEl.addEventListener('click', function(event) {
     } else if (event.target.value === 'took' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
       schedule.tookEvent(event.target, todaysMeds, obj, medications);
     } else if (event.target.value === 'skipped' && event.target.parentNode.parentNode.parentNode.id === todaysMeds[obj].name + 'Alert') {
-      schedule.skipEvent(event.target);
+      schedule.skipEvent(event.target, todaysMeds, obj);
     }
   }
 });
-
-// schedule.displayChart();

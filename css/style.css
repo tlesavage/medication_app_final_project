@@ -4,8 +4,6 @@ body {
   max-width: 960px;
   position: relative;
   margin: 0 auto;
-  /*background-color: #004a69;*/
-  /*background-color: #88bbd6;*/
   background: transparent linear-gradient(to right, #70BFD5 0%, #71C1D7 44%, #7ED5E9 100%) repeat scroll 0% 0%;
   color: white;
 }
@@ -88,7 +86,7 @@ h3 {
   max-width: 50%;
   float: right;
   right: 20px;
-  bottom: 135px;
+  bottom: 35px;
 }
 
 /* End Chart */
@@ -153,18 +151,20 @@ h3 {
    font-family: Georgia, serif;
    text-decoration: none;
    vertical-align: middle;
-   }
+}
+
 .buttonThing:hover {
    border-top-color: #283978;
    background: #283978;
    color: #ccc;
-   }
+}
+
 .buttonThing:active {
    border-top-color: #1b435e;
    background: #1b435e;
-   }
+}
 
-   /* End Button Styles */
+/* End Button Styles */
 
 
 /* Upcoming Refills */
@@ -186,6 +186,7 @@ h3 {
 #thingsToDoGroup a:hover {
   color: #44970D;
 }
+
 #addDrugsButton {
   position: absolute;
   right: 5px;
@@ -197,14 +198,9 @@ h3 {
   margin-left: 90px;
 }
 
-
 .alert > td, .alert > th {
   background-color: #c02b44;
 }
-
-/*main > section > a {
-  color: red;
-}*/
 
 #noMedMessage {
   text-align: center;
@@ -218,10 +214,7 @@ h3 {
 #firstFields {
   width: 40%;
   float: left;
-  /*padding: 0;*/
   padding-top:1cm;
-  /*margin: 0;*/
-  /*display: block;*/
 }
 
 .addForms {
@@ -249,19 +242,12 @@ h3 {
 #secondFields {
   width :40%;
   float: right;
-  /*padding: 0;*/
   padding-top: 55px;
-  /*margin: 0;*/
-  /*display: inline-block;*/
 }
 
 .formGroup {
   border: none;
 }
-
-/*label {
-  display: block;
-}*/
 
 .containerForm {
   position: relative;
@@ -324,7 +310,7 @@ img {
 
 footer {
   text-align: center;
-  margin-top: 200px;
+  margin-top: 15px;
   height: 20px;
 }
 
@@ -363,13 +349,3 @@ footer:after {
 .copyright {
   text-align: center;
 }
-
-/*p1 {
- display:inline;
- word-wrap: break-word;
- color: black;*/
-=======
-
-/*a {
-  color: orange;
-}*/
