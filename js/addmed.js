@@ -26,11 +26,13 @@ formEl.addEventListener('submit', function(event) {
   var newDrug = new Medication(newName, newPrescriber, newDosage, newDoseType, newQuantity, newStart, newDuration, newIntervals, newFirst, newFood, newNumRefills, newPharmName, newPharmPhone, newTaking, newAddCurrSched, newNotes);
   formEl.reset();
 
-  if (newDrug.taking === false) {
-    var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
-    console.log(todaysMeds);
-    todaysMeds.push(newDrug);
-    localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+  if(localStorage.todaysMedsStored) {
+    if(newDrug.taking === false) {
+      var todaysMeds = JSON.parse(localStorage.getItem('todaysMedsStored'));
+      console.log(todaysMeds);
+      todaysMeds.push(newDrug);
+      localStorage.setItem('todaysMedsStored', JSON.stringify(todaysMeds));
+    }
   }
 
   var jsonMed = JSON.stringify(medications);
