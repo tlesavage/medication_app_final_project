@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add/Edit Medication</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header>
+      <div id="logo">
+        <img src="imgs/main_logo1.png">
+      </div>
+      <div id="topNav">
+        <nav id="globalNav">
+          <a class="navLink" href="index.html">Home</a>
+          <a class="navLink" href="medList.html">Medications</a>
+          <a class="navLink" href="archives.html">Archives</a>
+          <a class="navLink" href="aboutus.html">About Us</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="clearfix" class="containerForm">
+        <h1 class="title" id="addNewTitle" hidden="false">Add New Mediation</h1>
+        <h1 class="title" id="editMedTitle" hidden>Edit Medication</h1>
+        <section class="desc-block-left" id="medicationForm">
+          <form id="medForm">
+            <fieldset class="formGroup" id="firstFields">
+              <legend id="addForm">ADD NEW MEDICATION</legend>
+              <input type="text" class="addForms" id="medName" placeholder="Medication Name" required />
+              <input type="text" class="addForms" id="docName" placeholder="Prescribing MD Name" />
+              <input type="number" class="addForms" id="dose" placeholder="Dosage" required/>
+              <select class="medSelect" class="addForms" id="dosageType" name="dosageType">
+                <option value="default">Dosage Type</option>
+                <option value="Pills">Pills</option>
+                <option value="CC">cc</option>
+                <option value="ML">ml</option>
+                <option value="GR">gr</option>
+                <option value="MG">mg</option>
+                <option value="Drops">Drops</option>
+                <option value="Other">Other</option>
+              </select>
+              <input type="number" class="addForms" id="quantity" placeholder="Number in Rx" />
+              <input type="date" class="addForms" id="startDate" placeholder="Start Date" required/>
+              <input type="text" class="addForms" id="duration" placeholder="Duration of Rx" />
+              <select class="interval" class="addForms" id="intervalTake" name="intervalTake" required>
+                <option value="default">Intervals</option>
+                <option value="daily">Every Day</option>
+                <option value="otherDay">Every Other Day</option>
+                <option value="thirdDay">Every Third Day</option>
+                <option value="weekly">Once a Week</option>
+                <option value="twoWeeks">Once Every Two Weeks</option>
+                <option value="monthly">Once a Month</option>
+              </select>
+              <label id="takeLabel" class="addForms" for="firstTake">First Time Taken</label>
+              <input type="time" class="addForms" id="firstTake" placeholder="First Time Taken" required/>
+              <select class="foodSelect" class="addForms" id="foodInstructions" name="food">
+                <option value="default">Food Instructions</option>
+                <option value="with">With Food</option>
+                <option value="before">Before Food</option>
+              </select>
+            </fieldset>
+          </section>
+          <section class="desc-block-right">
+            <fieldset class="formGroup" class="addForms" id="secondFields">
+              <input type="number" class="addForms" id="numRefills" placeholder="Number of Refills" />
+              <input type="text" class="addForms" id="pharmName" placeholder="Pharmacy Name" />
+              <input type="tel" class="addForms" id="pharmNumber" placeholder="Pharmacy Phone" />
+              <label class="takingInstruction"><input type="checkbox" id="noLongerTaking" value="doneTaking"> No Longer Taking This</label>
+              <label class="takingInstruction"><input type="checkbox" id="addSched" value="addToSchedule"> Add to My Current Schedule</label>
+              <textarea class="addForms" id="medNotes" rows="4" cols="50">Additional Notes </textarea>
+              <section id="actionGroup">
+                <a id="cancelThing" href="medList.html"> Cancel </a>
+                <input class="buttonThing" type="submit" value="Save" id="save" />
+              </section>
+            </fieldset2>
+          </form>
+        </section>
+        <section id="disclaimer">
+          <p>Please take all medications as directed by your prescribing physician.  If you experience any negative side effects, please contact your doctor immediately.  If you miss a dosage, please contact your physician as soon as possible.  For all other emergencies, please call 911 or go to your nearest emergency room.</p>
+        </section>
+      </div>
+    </main>
+    <footer align="center">
+      <p class="copyright">&copy; 2016 MedTracker</p>
+      <a class="footLink" href="index.html">Home</a>
+      <a class="footLink" href="medList.html">Medications</a>
+      <a class="footLink" href="archives.html">Archives</a>
+      <a class="footLink" href="aboutus.html">About Us</a>
+    </footer>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/addmed.js"></script>
+  </body>
+</html>

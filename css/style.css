@@ -1,0 +1,363 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+
+body {
+  max-width: 960px;
+  position: relative;
+  margin: 0 auto;
+  background: transparent linear-gradient(to right, #70BFD5 0%, #71C1D7 44%, #7ED5E9 100%) repeat scroll 0% 0%;
+  color: white;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+#logo {
+  height:127px;
+  width:960px;
+  background-color: white;
+}
+#logo img {
+  max-width:100%;
+  max-height:100%;
+}
+
+/* Global Nav */
+#topNav {
+  text-align: center;
+  margin-top: 15px;
+  height: 20px;
+  border-bottom: 1px solid grey;
+}
+
+#globalNav {
+  text-align: justify;
+}
+
+#globalNav a {
+  display: inline-block;
+  color: white;
+}
+
+#globalNav a:hover {
+  color: #44970D;
+}
+
+#globalNav:after {
+  content: '';
+  width: 100%;
+  display: inline-block;
+}
+
+.navLink:nth-child(1) {
+  padding-left: 40px;
+}
+
+.navLink:nth-child(4) {
+  padding-right: 40px;
+}
+
+/* End Global Nav */
+
+
+/* Fonts */
+
+h1, h2, h3, p, a {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font size: 15px;
+}
+
+h3 {
+  font-size: 10px;
+}
+
+/* End Fonts*/
+
+/* Chart */
+#myChart {
+  width: 100%;
+}
+
+#streak {
+  float: right;
+  width: 45%;
+  margin-bottom: 75px;
+}
+
+/* End Chart */
+
+/* Up Next Section */
+
+#upNextSec {
+  margin-top: 50px;
+  margin-bottom: 75px;
+  /*border-bottom: 1px solid grey;*/
+}
+
+/* End Up Next Section */
+
+/* All Tables */
+
+.medicationTableView {
+  background-color: white;
+  width: 100%;
+  border-spacing: 0px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+  border-radius: 10px;
+}
+
+.medicationTableView th, td {
+  text-align: left;
+  padding: 5px 20px 5px 10px;
+  border-spacing: 0px;
+  border-top: 1px solid #949494;
+  color: black;
+}
+
+.medicationTableView a {
+  color: black;
+}
+
+.medicationTableView a:hover {
+  color: #44970D;
+}
+
+/* End Tables */
+
+/*button styles from css tricks.com*/
+.buttonThing {
+  display: inline;
+   border-top: 1px solid #97a7f7;
+   background: #a5d665;
+   background: -webkit-gradient(linear, left top, left bottom, from(#539c3e), to(#a5d665));
+   background: -webkit-linear-gradient(top, #539c3e, #a5d665);
+   background: -moz-linear-gradient(top, #539c3e, #a5d665);
+   background: -ms-linear-gradient(top, #539c3e, #a5d665);
+   background: -o-linear-gradient(top, #539c3e, #a5d665);
+   padding: 10px 20px;
+   -webkit-border-radius: 15px;
+   -moz-border-radius: 15px;
+   border-radius: 15px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 15px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+.buttonThing:hover {
+   border-top-color: #283978;
+   background: #283978;
+   color: #ccc;
+}
+
+.buttonThing:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+}
+
+/* End Button Styles */
+
+
+/* Upcoming Refills */
+.containerLeft {
+  width: 45%;
+  padding: 10px;
+  margin-bottom: 75px;
+  float: left;
+  background-color: white;
+  color: black;
+  border-radius: 50px;
+}
+
+#thingsToDoGroup {
+  position: relative;
+  top: 80px;
+}
+
+#thingsToDoGroup a {
+  color: white;
+}
+
+#thingsToDoGroup a:hover {
+  color: #44970D;
+}
+
+#addDrugsButton {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+#editLinkThing {
+  poistion: absolute;
+  margin-left: 90px;
+}
+
+.alert > td, .alert > th {
+  background-color: #ff9999;
+}
+
+#noMedMessage {
+  text-align: center;
+}
+
+/* Add Med Form */
+#addForm {
+  font-size: 20px;
+}
+
+#firstFields {
+  width: 40%;
+  float: left;
+  padding-top:1cm;
+}
+
+.addForms {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#takeLabel {
+  margin-bottom: 2px;
+}
+
+#firstTake {
+  margin-top: 5px;
+}
+
+.takingInstruction {
+  display: block;
+}
+
+#addSched {
+  margin-top: 10px;
+}
+
+#secondFields {
+  width :40%;
+  float: right;
+  padding-top: 55px;
+}
+
+.formGroup {
+  border: none;
+}
+
+.containerForm {
+  position: relative;
+  width: 100%;
+  max-height: 100%;
+  margin-top: 50px;
+	/*overflow: visible;*/
+}
+
+#disclaimer {
+  position: absolute;
+  top: 550px;
+}
+
+#actionGroup {
+  position: relative;
+  right: 60px;
+  margin-top: 10px;
+}
+
+#actionGroup a {
+  color: white;
+}
+
+#actionGroup a:hover {
+  color: #44970D;
+}
+
+#cancelThing {
+  position: absolute;
+  right: 90px;
+  top: 15px;
+}
+
+#save {
+  float: right;
+}
+
+/* End Add Med Form */
+
+img {
+  height: auto;
+  width: auto;
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 100px;
+}
+
+/* About Us */
+#container{
+  width:100%;
+}
+
+#left{
+  float:left;
+  width:250px;
+}
+
+#right{
+  float:right;
+  width:250px;
+}
+
+#center{margin:0 auto;width:250px;}
+
+/* End Abut Us */
+
+/* Footer */
+
+footer {
+  text-align: center;
+  margin-top: 220px;
+  height: 20px;
+  border-top: 1px solid grey;
+  text-align: justify;
+  clear: both;
+}
+
+footer a {
+  display: inline-block;
+  color: white;
+}
+
+footer a:hover {
+  color: #44970D;
+}
+
+footer:after {
+  content: '';
+  width: 100%;
+  display: inline-block;
+}
+
+.footLink:nth-child(1) {
+  margin-right: 20px;
+  padding-left: 40px;
+}
+
+.footLink:nth-child(4) {
+  padding-right: 40px;
+}
+
+.copyright {
+  text-align: center;
+}
